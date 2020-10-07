@@ -16,7 +16,7 @@
             android:id="@+id/viewHeader"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:background="@drawable/header_background"
+            android:background="@color/colorAccent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -95,7 +95,8 @@
             app:riv_border_width="1dp"
             app:riv_oval="true" />
 
-        <TextView
+
+        <Button
             android:id="@+id/bookmark"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -103,41 +104,29 @@
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:text="즐겨찾기"
-            android:textAllCaps="true"
+            android:textColor="#000000"
             android:textSize="20sp"
+            android:backgroundTint="#ffffff"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layoutProfile" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_centerInParent="true"
-            android:background="@color/colorAccent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bookmark" />
 
-        <TextView
-            android:id="@+id/friendList"
+        <Button
+            android:id="@+id/buttonfriendList"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="50dp"
             android:gravity="center_vertical"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:text="친구목록"
-            android:textAllCaps="true"
+            android:textColor="#000000"
             android:textSize="20sp"
+            android:backgroundTint="#ffffff"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/bookmark" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_centerInParent="true"
-            android:background="@color/colorAccent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/friendList" />
 
-        <TextView
+        <Button
             android:id="@+id/registerPhoto"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -145,18 +134,11 @@
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:text="대표사진 등록하기"
-            android:textAllCaps="true"
+            android:textColor="#000000"
             android:textSize="20sp"
+            android:backgroundTint="#ffffff"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/friendList" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_centerInParent="true"
-            android:background="@color/colorAccent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/registerPhoto" />
+            app:layout_constraintTop_toBottomOf="@+id/buttonfriendList" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
