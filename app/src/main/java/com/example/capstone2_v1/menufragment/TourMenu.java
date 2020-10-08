@@ -34,8 +34,8 @@ public class TourMenu extends Fragment {
     String myJSON;
 
     private static final String TAG_RESULTS = "result";
-    private static final String TAG_NAME = "name";
-    private static final String TAG_ADD = "address";
+    private static final String TAG_NAME = "tour_name";
+    private static final String TAG_ADD = "tour_add";
 
     JSONArray tours = null;
 

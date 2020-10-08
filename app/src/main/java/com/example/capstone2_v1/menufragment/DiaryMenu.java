@@ -34,10 +34,10 @@ public class DiaryMenu extends Fragment {
     String myJSON;
 
     private static final String TAG_RESULTS = "result";
-    private static final String TAG_TIME = "diary_time";
-    private static final String TAG_NAME = "tour_name";
-    private static final String TAG_TITLE = "diary_title";
-    private static final String TAG_CON = "diary_con";
+    private static final String TAG_TIME = "d.diary_time";
+    private static final String TAG_NAME = "t.tour_name";
+    private static final String TAG_TITLE = "d.diary_title";
+    private static final String TAG_CON = "d.diary_con";
 
     JSONArray diaries = null;
 
