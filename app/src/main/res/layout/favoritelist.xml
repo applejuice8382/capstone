@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@+id/activity_vertical_margin"
+    android:paddingLeft="@+id/activity_horizontal_margin"
+    android:paddingRight="@+id/activity_horizontal_margin"
+    android:paddingTop="@+id/activity_vertical_margin"
+    tools:context="com.example.capstone2_v1.MainActivity">
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="즐겨찾기"
+        android:gravity="center"
+        android:textStyle="bold" />
+    <ListView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/location"/>
+</RelativeLayout>

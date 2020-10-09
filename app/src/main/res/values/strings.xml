@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Trapic</string>
+    <string name="profie_name">이름</string>
+    <string name="profie_id">아이디</string>
+</resources>
