@@ -21,6 +21,7 @@ public class GridItemView extends LinearLayout {
         textView = (TextView) findViewById(R.id.gridviewtxt);
     }
 
+
     public void setName(String name) {
         textView.setText(name);
     }
