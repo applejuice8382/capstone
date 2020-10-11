@@ -97,7 +97,7 @@
 
 
         <Button
-            android:id="@+id/bookmark"
+            android:id="@+id/buttonfavorite"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical"
@@ -112,7 +112,7 @@
 
 
         <Button
-            android:id="@+id/buttonfriendList"
+            android:id="@+id/buttonfriend"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical"
@@ -123,7 +123,7 @@
             android:textSize="20sp"
             android:backgroundTint="#ffffff"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bookmark" />
+            app:layout_constraintTop_toBottomOf="@+id/buttonfavorite" />
 
 
         <Button
@@ -138,7 +138,7 @@
             android:textSize="20sp"
             android:backgroundTint="#ffffff"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonfriendList" />
+            app:layout_constraintTop_toBottomOf="@+id/buttonfriend" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
