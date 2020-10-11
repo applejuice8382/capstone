@@ -25,6 +25,7 @@
                 android:textSize="18dp" />
 
             <EditText
+                android:id="@+id/inputid"
                 android:background="@drawable/edittextstyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -39,6 +40,7 @@
                 android:textSize="18dp" />
 
             <EditText
+                android:id="@+id/inputpw"
                 android:background="@drawable/edittextstyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,12 +61,14 @@
                 android:text="이름"
                 android:textSize="18dp" />
             <EditText
+                android:id="@+id/inputname"
                 android:background="@drawable/edittextstyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="이름 입력"></EditText>
 
             <Button
+                android:id="@+id/buttonsignup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"

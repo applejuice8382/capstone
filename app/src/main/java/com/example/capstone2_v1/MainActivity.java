@@ -3,6 +3,7 @@ package com.example.capstone2_v1;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -11,7 +12,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
@@ -41,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
 
         //툴바 뒤로가기
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -130,6 +133,23 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
        //super.onBackPressed();
+    }
+
+    public void replaceFragment(int usage){
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        switch (usage){
+            case 1:
+                fragmentTransaction.replace(R.id.frame_layout, new FavoriteList());
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            case 2:
+                fragmentTransaction.replace(R.id.frame_layout, new FriendList());
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            default:
+                break;
+
+        }
     }
 
 }
