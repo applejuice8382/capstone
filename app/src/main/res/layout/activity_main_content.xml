@@ -15,19 +15,6 @@
         android:layout_marginBottom="?attr/actionBarSize" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_sub1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="140dp"
-        android:layout_marginRight="15dp"
-        android:src="@drawable/ic_event_note"
-        android:visibility="invisible"
-        app:backgroundTint="#ffffff"
-        app:elevation="6dp"
-        app:pressedTranslationZ="12dp" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,7 +22,7 @@
         android:layout_marginBottom="70dp"
         android:layout_marginRight="15dp"
         android:backgroundTint="@color/colorPrimary"
-        android:src="@drawable/ic_add_circle_outline"/>
+        android:src="@drawable/ic_add"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_view"

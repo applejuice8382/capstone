@@ -19,9 +19,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name=".MainActivity"/>
         <activity android:name=".SignupActivity"/>
         <activity android:name=".SplashMain" android:windowSoftInputMode="stateAlwaysHidden" />
+=======
+        <activity android:name=".SearchMenu"/>
+        <activity android:name=".FriendMain"/>
+        <activity android:name=".insert.InsertDiary"/>
+>>>>>>> cb574f61f1f99a81596b511f3473ebe8af5811e3
     </application>
 
 </manifest>

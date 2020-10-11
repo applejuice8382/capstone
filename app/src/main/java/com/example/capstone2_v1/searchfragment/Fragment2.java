@@ -1,4 +1,4 @@
-package com.example.capstone2_v1.menufragment;
+package com.example.capstone2_v1.searchfragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,14 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class SearchMenu extends Fragment {
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+public class Fragment2 extends Fragment {
 
+    @Nullable
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.search, container, false);
-
-        return view;
+        return inflater.inflate(R.layout.usertab,container,false);
     }
 }
