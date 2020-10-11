@@ -19,8 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".SearchMenu"/>
         <activity android:name=".FriendMain"/>
+        <activity android:name=".insert.InsertDiary"/>
     </application>
 
 </manifest>
