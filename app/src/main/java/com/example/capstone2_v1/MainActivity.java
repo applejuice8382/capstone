@@ -8,14 +8,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
 import com.example.capstone2_v1.insert.InsertDiary;
 import com.example.capstone2_v1.menufragment.DiaryMenu;
@@ -24,6 +21,8 @@ import com.example.capstone2_v1.menufragment.MypageMenu;
 import com.example.capstone2_v1.menufragment.TourMenu;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.security.MessageDigest;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,9 +40,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
 
         //툴바 뒤로가기
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);

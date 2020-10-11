@@ -1,8 +1,12 @@
 package com.example.capstone2_v1;
 
 import android.app.ProgressDialog;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,9 +19,11 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.security.MessageDigest;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+//수정 필요 insert 오류
 public class SignupActivity extends AppCompatActivity {
 
     private EditText inputId;
@@ -46,6 +52,7 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void insertMember(final String id, final String pw, final String name){
         class InsertData extends AsyncTask<String, Void, String>{
