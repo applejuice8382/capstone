@@ -9,13 +9,13 @@
         android:layout_width="100dp"
         android:layout_height="130dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_lineheart"/>
+        android:src="@drawable/tea"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
         android:layout_marginTop="3dp"
-        android:text="명소1"
+        android:text="하동 녹차 밭"
         android:textSize="15sp"/>
 </LinearLayout>

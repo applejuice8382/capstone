@@ -20,4 +20,6 @@ public class FavoriteList extends Fragment {
 
         return view;
     }
+
+
 }

@@ -10,13 +10,13 @@
         android:layout_width="100dp"
         android:layout_height="130dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_lineheart"/>
+        android:src="@drawable/hand"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
         android:layout_marginTop="3dp"
-        android:text="명소1"
+        android:text="호미곶 상생의 손"
         android:textSize="15sp"/>
 </LinearLayout>

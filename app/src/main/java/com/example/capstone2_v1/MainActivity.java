@@ -9,12 +9,18 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.example.capstone2_v1.insert.InsertDiary;
+import com.example.capstone2_v1.menufragment.ChatMenu;
 import com.example.capstone2_v1.menufragment.DiaryMenu;
 import com.example.capstone2_v1.menufragment.MapMenu;
 import com.example.capstone2_v1.menufragment.MypageMenu;
@@ -23,6 +29,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private MapMenu MapMenu = new MapMenu();
     private MypageMenu MypageMenu = new MypageMenu();
     private TourMenu TourMenu = new TourMenu();
+    private ChatMenu ChatMenu = new ChatMenu();
     private SearchMenu SearchMenu = new SearchMenu();
 
     private Context mContext;
@@ -62,9 +70,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_view);
         // 첫 화면 지정
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -76,13 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(), SearchMenu.class);
                 startActivity(intent);
-//                FragmentTransaction transaction = fragmentManager.beginTransaction();
-//                switch (item.getItemId()) {
-//                    case R.id.search: {
-//                        transaction.replace(R.id.frame_layout, SearchMenu).commitAllowingStateLoss();
-//                        break;
-//                    }
-//                }
+
                 return true;
 
             }
@@ -98,18 +97,27 @@ public class MainActivity extends AppCompatActivity {
                         transaction.replace(R.id.frame_layout, MapMenu).commitAllowingStateLoss();
                         break;
                     }
+
                     case R.id.navigation_menu2: {
                         transaction.replace(R.id.frame_layout, DiaryMenu).commitAllowingStateLoss();
                         break;
                     }
+
                     case R.id.navigation_menu3: {
                         transaction.replace(R.id.frame_layout, TourMenu).commitAllowingStateLoss();
                         break;
                     }
+
                     case R.id.navigation_menu4: {
+                        transaction.replace(R.id.frame_layout, ChatMenu).commitAllowingStateLoss();
+                        break;
+                    }
+
+                    case R.id.navigation_menu5: {
                         transaction.replace(R.id.frame_layout, MypageMenu).commitAllowingStateLoss();
                         break;
                     }
+
                 }
 
                 return true;
@@ -155,5 +163,8 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
+
+
 
 }

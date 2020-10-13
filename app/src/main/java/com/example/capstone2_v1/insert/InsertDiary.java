@@ -28,10 +28,11 @@ import androidx.appcompat.widget.Toolbar;
 
 public class InsertDiary extends AppCompatActivity {
 
-    EditText ediary_title, emem_id, ediary_con ;
-    TextView tour_no;
-    Button insert;
+    private static String IP_ADDRESS = "10.20.55.177:8070";
     private static String TAG = "phptest";
+
+    private EditText ediary_title, emem_id, ediary_con, etour_no;
+    private Button insert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -59,7 +60,7 @@ public class InsertDiary extends AppCompatActivity {
         ediary_title = (EditText)findViewById(R.id.add_diary_title);
         emem_id = (EditText)findViewById(R.id.add_id);
         ediary_con = (EditText)findViewById(R.id.add_content);
-        tour_no = (TextView)findViewById(R.id.add_where);
+        etour_no = (EditText) findViewById(R.id.add_where);
 
         insert = (Button)findViewById(R.id.insert);
         insert.setOnClickListener(new View.OnClickListener() {
@@ -68,16 +69,19 @@ public class InsertDiary extends AppCompatActivity {
                 String diary_title = ediary_title.getText().toString();
                 String mem_id = emem_id.getText().toString();
                 String diary_con = ediary_con.getText().toString();
+                String tour_no = etour_no.getText().toString();
 
                 InsertData task = new InsertData();
-                task.execute("http://192.168.35.21:8070/diaryinsert.php");
+                task.execute("http://" + IP_ADDRESS + "/diaryinsert.php", mem_id, tour_no, diary_title, diary_con);
 
                 ediary_title.setText("");
                 ediary_con.setText("");
                 emem_id.setText("");
+                etour_no.setText("");
             }
         });
     }
+
     class InsertData extends AsyncTask<String, Void, String> {
         ProgressDialog progressDialog;
 
@@ -103,13 +107,12 @@ public class InsertDiary extends AppCompatActivity {
         protected String doInBackground(String... params) {
 
             String mem_id = (String)params[1];
-            String diary_title = (String)params[2];
-            String diary_con = (String)params[3];
-            String tour_no = "1";
-            String diary_private = "1";
+            String tour_no = (String)params[2];
+            String diary_title = (String)params[3];
+            String diary_con = (String)params[4];
 
             String serverURL = (String)params[0];
-            String postParameters = "mem_id="+ mem_id + "tour_no=" + tour_no + "diary_title=" + diary_title + "&diary_con=" + diary_con + "diary_private=" + diary_private;
+            String postParameters = "mem_id=" + mem_id + "&tour_no=" + tour_no + "&diary_title=" + diary_title + "&diary_con=" + diary_con;
 
 
             try {

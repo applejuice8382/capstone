@@ -54,7 +54,7 @@ public class DiaryMenu extends Fragment {
 
         list = (ListView) view.findViewById(R.id.diarylistview);
         diaryList = new ArrayList<HashMap<String, String>>();
-        getData("http://192.168.35.21:8070/diary.php"); //수정 필요
+        getData("http://10.20.55.177:8070/diary.php"); //수정 필요
 
         return view;
     }

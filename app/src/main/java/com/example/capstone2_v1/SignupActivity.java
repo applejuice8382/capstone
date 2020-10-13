@@ -20,6 +20,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,6 +35,7 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
+        getHashKey();
 
 
         inputId = (EditText) findViewById(R.id.inputid);
@@ -54,8 +56,8 @@ public class SignupActivity extends AppCompatActivity {
     }
 
 
-    private void insertMember(final String id, final String pw, final String name){
-        class InsertData extends AsyncTask<String, Void, String>{
+    private void insertMember(final String id, final String pw, final String name) {
+        class InsertData extends AsyncTask<String, Void, String> {
             ProgressDialog loading;
 
             @Override
@@ -63,6 +65,7 @@ public class SignupActivity extends AppCompatActivity {
                 super.onPreExecute();
                 loading = ProgressDialog.show(SignupActivity.this, "Please Wait", null, true, true);
             }
+
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
@@ -70,17 +73,18 @@ public class SignupActivity extends AppCompatActivity {
                 //Log.d("Tag : ", s); // php에서 가져온 값을 최종 출력함
                 Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
             }
+
             @Override
-            protected String doInBackground(String... params){
-                try{
+            protected String doInBackground(String... params) {
+                try {
                     String id = (String) params[0];
                     String pw = (String) params[1];
                     String name = (String) params[2];
 
                     String link = "http://127.0.0.1/InsertMember.php";
-                    String data = URLEncoder.encode("id","UTF-8") + "=" + URLEncoder.encode(id, "UTF-8");
-                    data += URLEncoder.encode("pw","UTF-8") + "=" + URLEncoder.encode(pw, "UTF-8");
-                    data += URLEncoder.encode("name","UTF-8") + "=" + URLEncoder.encode(name, "UTF-8");
+                    String data = URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(id, "UTF-8");
+                    data += URLEncoder.encode("pw", "UTF-8") + "=" + URLEncoder.encode(pw, "UTF-8");
+                    data += URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8");
 
                     URL url = new URL(link);
                     URLConnection conn = url.openConnection();
@@ -109,5 +113,25 @@ public class SignupActivity extends AppCompatActivity {
         }
         InsertData task = new InsertData();
         task.execute(id, pw, name);
+    }
+    private void getHashKey(){
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (packageInfo == null)
+            Log.e("KeyHash", "KeyHash:null");
+
+        for (Signature signature : packageInfo.signatures) {
+            try {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            } catch (NoSuchAlgorithmException e) {
+                Log.e("KeyHash", "Unable to get MessageDigest. signature=" + signature, e);
+            }
+        }
     }
 }

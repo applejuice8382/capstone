@@ -46,7 +46,7 @@ public class Fragment1 extends Fragment {
 
         list = (ListView) v.findViewById(R.id.listview);
         tourList = new ArrayList<HashMap<String, String>>();
-        getData("http://192.168.35.21:8070/tour.php"); //수정 필요
+        getData("http://10.20.55.177:8070/tour.php"); //수정 필요
 
         return v;
 

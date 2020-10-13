@@ -14,9 +14,9 @@ import android.widget.SimpleAdapter;
 import com.example.capstone2_v1.R;
 
 
-import net.daum.mf.map.api.MapPOIItem;
-import net.daum.mf.map.api.MapPoint;
-import net.daum.mf.map.api.MapView;
+//import net.daum.mf.map.api.MapPOIItem;
+//import net.daum.mf.map.api.MapPoint;
+//import net.daum.mf.map.api.MapView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,29 +56,29 @@ public class TourMenu extends Fragment {
 
         list = (ListView) view.findViewById(R.id.listview);
         tourList = new ArrayList<HashMap<String, String>>();
-        getData("http://192.168.35.21:8070/tour.php"); //수정 필요
+        getData("http://10.20.55.177:8070/tour.php"); //수정 필요
 
-        //카카오지도
-//        MapView mapView = new MapView(getActivity());
-//        ViewGroup mapViewContainer = (ViewGroup) view.findViewById(R.id.MapView);
-//        mapViewContainer.addView(mapView);
-//
-//        // 중심점 변경 - 예제 좌표는 서울 남산
-//        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.54892296550104, 126.99089033876304), true);
-//
-//        // 줌 레벨 변경
-//        mapView.setZoomLevel(4, true);
-//
-//        //마커 찍기
-//        MapPoint MARKER_POINT = MapPoint.mapPointWithGeoCoord(37.54892296550104, 126.99089033876304);
-//        MapPOIItem marker = new MapPOIItem();
-//        marker.setItemName("Default Marker");
-//        marker.setTag(0);
-//        marker.setMapPoint(MARKER_POINT);
-//        marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
-//        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
-//
-//        mapView.addPOIItem(marker);
+////        카카오지도
+/*        MapView mapView = new MapView(getActivity());
+        ViewGroup mapViewContainer = (ViewGroup) view.findViewById(R.id.MapView);
+        mapViewContainer.addView(mapView);
+
+        // 중심점 변경 - 예제 좌표는 서울 남산
+        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.54892296550104, 126.99089033876304), true);
+
+        // 줌 레벨 변경
+        mapView.setZoomLevel(4, true);
+
+        //마커 찍기
+        MapPoint MARKER_POINT = MapPoint.mapPointWithGeoCoord(37.54892296550104, 126.99089033876304);
+        MapPOIItem marker = new MapPOIItem();
+        marker.setItemName("Default Marker");
+        marker.setTag(0);
+        marker.setMapPoint(MARKER_POINT);
+        marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
+        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+
+        mapView.addPOIItem(marker);*/
 
 
         return view;
