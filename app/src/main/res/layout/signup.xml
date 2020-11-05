@@ -28,7 +28,7 @@
                 android:id="@+id/inputid"
                 android:background="@drawable/edittextstyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:hint="아이디 입력"></EditText>
 
             <TextView
@@ -43,14 +43,14 @@
                 android:id="@+id/inputpw"
                 android:background="@drawable/edittextstyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:hint="비밀번호 입력"></EditText>
 
             <EditText
                 android:background="@drawable/edittextstyle"
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:hint="비밀번호 재입력"></EditText>
 
             <TextView
@@ -64,7 +64,7 @@
                 android:id="@+id/inputname"
                 android:background="@drawable/edittextstyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:hint="이름 입력"></EditText>
 
             <Button
