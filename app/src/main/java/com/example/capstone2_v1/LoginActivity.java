@@ -54,11 +54,11 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            JSONObject jsoneRessponse = new JSONObject(response);
-                            boolean success = jsoneRessponse.getBoolean("success");
+                            JSONObject jsonObject = new JSONObject(response);
+                            boolean success = jsonObject.getBoolean("success");
                             if (success) {
-                                String mem_id = jsoneRessponse.getString("mem_id");
-                                String mem_nick = jsoneRessponse.getString("mem_nick");
+                                String mem_id = jsonObject.getString("mem_id");
+                                String mem_nick = jsonObject.getString("mem_nick");
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.putExtra("mem_id", mem_id);
                                 intent.putExtra("mem_nick", mem_nick);

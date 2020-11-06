@@ -1,137 +1,88 @@
 package com.example.capstone2_v1;
 
-import android.app.ProgressDialog;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
-//수정 필요 insert 오류
 public class SignupActivity extends AppCompatActivity {
 
-    private EditText inputId;
-    private EditText inputPw;
-    private EditText inputName;
+    EditText inputId, inputPw, inputNick;
+    Button signupButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
-        getHashKey();
-
 
         inputId = (EditText) findViewById(R.id.inputid);
         inputPw = (EditText) findViewById(R.id.inputpw);
-        inputName = (EditText) findViewById(R.id.inputname);
+        inputNick = (EditText) findViewById(R.id.inputnick);
 
-        final String id = inputId.getText().toString();
-        final String pw = inputPw.getText().toString();
-        final String name = inputName.getText().toString();
+        signupButton  = (Button) findViewById(R.id.buttonsignup);
 
-        Button signupBtn = (Button) findViewById(R.id.buttonsignup);
-        signupBtn.setOnClickListener(new Button.OnClickListener(){
+        signupButton.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View view){
-                insertMember(id, pw, name);
+                signup();
             }
         });
     }
+    private void signup(){
+        final String mem_id = inputId.getText().toString();
+        final String mem_pw = inputPw.getText().toString();
+        final String mem_nick = inputNick.getText().toString();
 
-
-    private void insertMember(final String id, final String pw, final String name) {
-        class InsertData extends AsyncTask<String, Void, String> {
-            ProgressDialog loading;
-
+        Response.Listener<String> responseListner = new Response.Listener<String>() {
             @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                loading = ProgressDialog.show(SignupActivity.this, "Please Wait", null, true, true);
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                loading.dismiss();
-                //Log.d("Tag : ", s); // php에서 가져온 값을 최종 출력함
-                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            protected String doInBackground(String... params) {
+            public void onResponse(String response) {
                 try {
-                    String id = (String) params[0];
-                    String pw = (String) params[1];
-                    String name = (String) params[2];
-
-                    String link = "http://127.0.0.1/InsertMember.php";
-                    String data = URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(id, "UTF-8");
-                    data += URLEncoder.encode("pw", "UTF-8") + "=" + URLEncoder.encode(pw, "UTF-8");
-                    data += URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8");
-
-                    URL url = new URL(link);
-                    URLConnection conn = url.openConnection();
-
-                    conn.setDoInput(true);
-                    OutputStreamWriter outputStreamWriter = new OutputStreamWriter(conn.getOutputStream());
-                    outputStreamWriter.write(data);
-                    outputStreamWriter.flush();
-
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
-                    StringBuilder sb = new StringBuilder();
-                    String line = null;
-
-                    // Read Server Response
-                    while ((line = reader.readLine()) != null) {
-                        sb.append(line);
-                        break;
+                    JSONObject jsonObject = new JSONObject(response);
+                    boolean success = jsonObject.getBoolean("success");
+                    if (success){
+                        Toast.makeText(getApplicationContext(), "회원가입 성공", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }else{
+                        Toast.makeText(getApplicationContext(),"회원가입 실패!",Toast.LENGTH_SHORT).show();
+                        return;
                     }
-                    Log.d("tag : ", sb.toString()); // php에서 결과값을 리턴
-                    return sb.toString();
-                } catch (Exception e) {
-                    return new String("Exception: " + e.getMessage());
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
-        }
-        InsertData task = new InsertData();
-        task.execute(id, pw, name);
-    }
-    private void getHashKey(){
-        PackageInfo packageInfo = null;
-        try {
-            packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        if (packageInfo == null)
-            Log.e("KeyHash", "KeyHash:null");
-
-        for (Signature signature : packageInfo.signatures) {
-            try {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.d("KeyHash", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            } catch (NoSuchAlgorithmException e) {
-                Log.e("KeyHash", "Unable to get MessageDigest. signature=" + signature, e);
+        };
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(),"회원가입 처리시 에러발생!",Toast.LENGTH_SHORT).show();
+                return;
             }
-        }
+        };
+
+
+        SignupRequest signupRequest = new SignupRequest(mem_id, mem_pw, mem_nick, responseListner,errorListener);
+        signupRequest.setShouldCache(false);
+
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        queue.add(signupRequest);
+
     }
+
+
 }

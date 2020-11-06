@@ -14,21 +14,20 @@
 
     <EditText
         android:id="@+id/idText"
-        android:layout_width="298dp"
+        android:layout_width="230dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:gravity="center"
         android:hint="Id" />
 
     <EditText
         android:id="@+id/pswordText"
-        android:layout_width="300dp"
+        android:inputType="textPassword"
+        android:layout_width="230dp"
         android:layout_height="50dp"
         android:layout_below="@+id/emailInput"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:gravity="center"
         android:hint="Password" />
 
     <Button

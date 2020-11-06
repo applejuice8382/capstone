@@ -41,6 +41,7 @@
 
             <EditText
                 android:id="@+id/inputpw"
+                android:inputType="textPassword"
                 android:background="@drawable/edittextstyle"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -48,6 +49,7 @@
 
             <EditText
                 android:background="@drawable/edittextstyle"
+                android:inputType="textPassword"
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -61,7 +63,7 @@
                 android:text="이름"
                 android:textSize="18dp" />
             <EditText
-                android:id="@+id/inputname"
+                android:id="@+id/inputnick"
                 android:background="@drawable/edittextstyle"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
