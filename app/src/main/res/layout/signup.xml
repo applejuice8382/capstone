@@ -24,12 +24,28 @@
                 android:text="아이디"
                 android:textSize="18dp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
             <EditText
                 android:id="@+id/inputid"
                 android:background="@drawable/edittextstyle"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="48dp"
                 android:hint="아이디 입력"></EditText>
+            <Button
+                android:id="@+id/validateButton"
+                android:layout_gravity="center_vertical"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:textSize="10dp"
+                android:text="중복체크">
+            </Button>
+            </LinearLayout>
+
 
             <TextView
                 android:layout_width="match_parent"
@@ -46,14 +62,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:hint="비밀번호 입력"></EditText>
-
-            <EditText
-                android:background="@drawable/edittextstyle"
-                android:inputType="textPassword"
-                android:layout_marginTop="5dp"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:hint="비밀번호 재입력"></EditText>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/inputpwck"
+                    android:background="@drawable/edittextstyle"
+                    android:inputType="textPassword"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="비밀번호 재입력"></EditText>
+
+                <ImageView
+                    android:layout_marginRight="15dp"
+                    android:layout_gravity="right|center_vertical"
+                    android:id="@+id/setImage"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
+
+
+
+            </FrameLayout>
 
             <TextView
                 android:layout_width="match_parent"

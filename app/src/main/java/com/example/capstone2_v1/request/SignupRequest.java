@@ -1,4 +1,4 @@
-package com.example.capstone2_v1;
+package com.example.capstone2_v1.request;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response;

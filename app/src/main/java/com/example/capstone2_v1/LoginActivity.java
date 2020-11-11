@@ -10,6 +10,7 @@ import android.widget.EditText;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.capstone2_v1.request.LoginRequest;
 
 import org.json.JSONObject;
 
@@ -26,9 +27,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-
-        Intent splash = new Intent(this, SplashMain.class);
-        startActivity(splash);
 
         idText =(EditText)findViewById(R.id.idText);
         passwordText =(EditText)findViewById(R.id.pswordText);

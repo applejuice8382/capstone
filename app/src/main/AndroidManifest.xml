@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".LoginActivity">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +23,7 @@
         </activity>
         <activity android:name=".MainActivity"/>
         <activity android:name=".SignupActivity"/>
-        <activity android:name=".SplashMain" android:windowSoftInputMode="stateAlwaysHidden" />
+       <activity android:name=".LoginActivity"/>
         <activity android:name=".SearchMenu"/>
         <activity android:name=".insert.InsertDiary"/>
 
