@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.example.capstone2_v1.MainActivity;
 import com.example.capstone2_v1.R;
 import com.example.capstone2_v1.SearchMenu;
+import com.example.capstone2_v1.menufragment.DiaryMenu;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -28,11 +30,12 @@ import androidx.appcompat.widget.Toolbar;
 
 public class InsertDiary extends AppCompatActivity {
 
-    private static String IP_ADDRESS = "10.20.55.177:8070";
+    private static String IP_ADDRESS = "192.168.35.21:8070";
     private static String TAG = "phptest";
 
     private EditText ediary_title, emem_id, ediary_con, etour_no;
     private Button insert;
+    private TextView mTextViewResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -61,6 +64,10 @@ public class InsertDiary extends AppCompatActivity {
         emem_id = (EditText)findViewById(R.id.add_id);
         ediary_con = (EditText)findViewById(R.id.add_content);
         etour_no = (EditText) findViewById(R.id.add_where);
+        mTextViewResult = (TextView)findViewById(R.id.textView_main_result);
+
+        mTextViewResult.setMovementMethod(new ScrollingMovementMethod());
+
 
         insert = (Button)findViewById(R.id.insert);
         insert.setOnClickListener(new View.OnClickListener() {
@@ -78,6 +85,9 @@ public class InsertDiary extends AppCompatActivity {
                 ediary_con.setText("");
                 emem_id.setText("");
                 etour_no.setText("");
+
+                onBackPressed();
+
             }
         });
     }
@@ -89,7 +99,7 @@ public class InsertDiary extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressDialog = ProgressDialog.show(getApplicationContext(),
+            progressDialog = ProgressDialog.show(InsertDiary.this,
                     "Please Wait", null, true, true);
         }
 

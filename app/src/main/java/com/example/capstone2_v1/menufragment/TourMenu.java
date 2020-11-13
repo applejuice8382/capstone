@@ -1,22 +1,25 @@
 package com.example.capstone2_v1.menufragment;
 
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 
 import com.example.capstone2_v1.R;
+import com.example.capstone2_v1.TourActivity;
 
 
-//import net.daum.mf.map.api.MapPOIItem;
-//import net.daum.mf.map.api.MapPoint;
-//import net.daum.mf.map.api.MapView;
+import net.daum.mf.map.api.MapPOIItem;
+import net.daum.mf.map.api.MapPoint;
+import net.daum.mf.map.api.MapView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +39,8 @@ import androidx.fragment.app.Fragment;
 public class TourMenu extends Fragment {
 
     String myJSON;
+
+    private static int REQUEST_ACCESS_FINE_LOCATION = 1000;
 
     private static final String TAG_RESULTS = "result";
     private static final String TAG_NAME = "tour_name";
@@ -58,29 +63,29 @@ public class TourMenu extends Fragment {
         tourList = new ArrayList<HashMap<String, String>>();
         getData("http://192.168.35.21:8070/tour.php"); //수정 필요
 
-////        카카오지도
-/*        MapView mapView = new MapView(getActivity());
-        ViewGroup mapViewContainer = (ViewGroup) view.findViewById(R.id.MapView);
-        mapViewContainer.addView(mapView);
-
-        // 중심점 변경 - 예제 좌표는 서울 남산
-        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.54892296550104, 126.99089033876304), true);
-
-        // 줌 레벨 변경
-        mapView.setZoomLevel(4, true);
-
-        //마커 찍기
-        MapPoint MARKER_POINT = MapPoint.mapPointWithGeoCoord(37.54892296550104, 126.99089033876304);
-        MapPOIItem marker = new MapPOIItem();
-        marker.setItemName("Default Marker");
-        marker.setTag(0);
-        marker.setMapPoint(MARKER_POINT);
-        marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
-        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
-
-        mapView.addPOIItem(marker);*/
-
-
+//////        카카오지도
+//        MapView mapView = new MapView(getActivity());
+//        ViewGroup mapViewContainer = (ViewGroup) view.findViewById(R.id.MapView);
+//        mapViewContainer.addView(mapView);
+//
+//        // 중심점 변경 - 예제 좌표는 서울 남산
+//        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.54892296550104, 126.99089033876304), true);
+//
+//        // 줌 레벨 변경
+//        mapView.setZoomLevel(4, true);
+//
+//        //마커 찍기
+//        MapPoint MARKER_POINT = MapPoint.mapPointWithGeoCoord(37.54892296550104, 126.99089033876304);
+//        MapPOIItem marker = new MapPOIItem();
+//        marker.setItemName("Default Marker");
+//        marker.setTag(0);
+//        marker.setMapPoint(MARKER_POINT);
+//        marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
+//        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+//
+//        mapView.addPOIItem(marker);
+//
+//
         return view;
     }
 
@@ -116,6 +121,13 @@ public class TourMenu extends Fragment {
         }
 
     }
+
+//    @Override
+//    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//        Intent intent = new Intent(getActivity(), TourActivity.class );
+//        intent.putExtra("id", datas.get(position).id);
+//        startActivity(intent);
+//    }
 
     public void getData (String url){
         class GetDataJSON extends AsyncTask<String, Void, String> {

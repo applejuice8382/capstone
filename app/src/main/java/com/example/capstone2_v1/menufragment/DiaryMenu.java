@@ -1,8 +1,11 @@
 package com.example.capstone2_v1.menufragment;
 
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +25,16 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.concurrent.Executors;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class DiaryMenu extends Fragment {
 
@@ -45,16 +52,19 @@ public class DiaryMenu extends Fragment {
 
     ListView list;
 
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.diary, container, false);
 
         list = (ListView) view.findViewById(R.id.diarylistview);
         diaryList = new ArrayList<HashMap<String, String>>();
         getData("http://192.168.35.21:8070/diary.php"); //수정 필요
+
 
         return view;
     }
@@ -135,6 +145,18 @@ public class DiaryMenu extends Fragment {
         g.execute(url);
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        diaryList = new ArrayList<HashMap<String, String>>();
+        getData("http://192.168.35.21:8070/diary.php"); //수정 필요
+
+    }
+
+
+
 }
 
 

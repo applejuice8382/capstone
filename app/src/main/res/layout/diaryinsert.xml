@@ -137,4 +137,9 @@
         android:text="저장하기"
         android:textSize="20dp"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:id="@+id/textView_main_result" />
+
 </LinearLayout>
