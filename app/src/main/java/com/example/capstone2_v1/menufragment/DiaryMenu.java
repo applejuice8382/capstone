@@ -1,21 +1,13 @@
 package com.example.capstone2_v1.menufragment;
 
-
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
-
-import com.example.capstone2_v1.R;
-
+import com.example.capstone2_v1.adapter.DiaryListViewAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,18 +17,14 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.concurrent.Executors;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.fragment.app.ListFragment;
 
-public class DiaryMenu extends Fragment {
+public class DiaryMenu extends ListFragment {
 
     String myJSON;
 
@@ -51,26 +39,20 @@ public class DiaryMenu extends Fragment {
     ArrayList<HashMap<String, String>> diaryList;
 
     ListView list;
+    DiaryListViewAdapter adapter;
 
-
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.diary, container, false);
+        adapter = new DiaryListViewAdapter();
+        getData("http://192.168.0.5:80/diary.php");
 
-        list = (ListView) view.findViewById(R.id.diarylistview);
-        diaryList = new ArrayList<HashMap<String, String>>();
-        getData("http://192.168.35.21:8070/diary.php"); //수정 필요
-
-
-        return view;
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-    protected void showList () {
+    protected void showList() {
         try {
+            setListAdapter(adapter);
             JSONObject jsonObj;
             jsonObj = new JSONObject(myJSON);
             diaries = jsonObj.getJSONArray(TAG_RESULTS);
@@ -82,30 +64,16 @@ public class DiaryMenu extends Fragment {
                 String title = c.getString(TAG_TITLE);
                 String con = c.getString(TAG_CON);
 
-                HashMap<String, String> diarys = new HashMap<String, String>();
-
-                diarys.put(TAG_TIME, time);
-                diarys.put(TAG_NAME, name);
-                diarys.put(TAG_TITLE, title);
-                diarys.put(TAG_CON, con);
-
-                diaryList.add(diarys);
+                adapter.addItem(time, name, title, con);
             }
-
-            ListAdapter adapter = new SimpleAdapter(
-                    getContext(), diaryList, R.layout.diarylistview,
-                    new String[]{TAG_TIME, TAG_NAME, TAG_TITLE, TAG_CON},
-                    new int[]{R.id.diarydate, R.id.diarywhere, R.id.diarytitle, R.id.diarycontent}
-            );
-
-            list.setAdapter(adapter);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
     }
 
-    public void getData (String url) {
+    public void getData(String url) {
         class GetDataJSON extends AsyncTask<String, Void, String> {
 
             @Override
@@ -124,6 +92,7 @@ public class DiaryMenu extends Fragment {
                     String json;
                     while ((json = bufferedReader.readLine()) != null) {
                         sb.append(json + "\n");
+
                     }
 
                     return sb.toString().trim();
@@ -131,7 +100,6 @@ public class DiaryMenu extends Fragment {
                 } catch (Exception e) {
                     return null;
                 }
-
 
             }
 
@@ -145,18 +113,5 @@ public class DiaryMenu extends Fragment {
         g.execute(url);
 
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        diaryList = new ArrayList<HashMap<String, String>>();
-        getData("http://192.168.35.21:8070/diary.php"); //수정 필요
-
-    }
-
-
-
 }
-
 
