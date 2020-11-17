@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginRequest extends StringRequest {
-    final static private String URL = "http://192.168.0.5:80/Login.php";
+    final static private String URL = "http://172.30.1.33:8070/Login.php";
     private Map<String, String> parameters;
 
     public LoginRequest(String mem_id, String mem_pw, Response.Listener<String> listner) {

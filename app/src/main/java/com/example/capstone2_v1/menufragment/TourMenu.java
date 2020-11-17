@@ -4,6 +4,8 @@ package com.example.capstone2_v1.menufragment;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 
 import com.example.capstone2_v1.R;
@@ -26,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -61,7 +65,7 @@ public class TourMenu extends Fragment {
 
         list = (ListView) view.findViewById(R.id.listview);
         tourList = new ArrayList<HashMap<String, String>>();
-        getData("http://192.168.35.21:8070/tour.php"); //수정 필요
+        getData("http://172.30.1.33:8070/tour.php"); //수정 필요
 
 //////        카카오지도
 //        MapView mapView = new MapView(getActivity());
@@ -86,8 +90,31 @@ public class TourMenu extends Fragment {
 //        mapView.addPOIItem(marker);
 //
 //
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+                TextView textviewName = (TextView)view.findViewById(R.id.name);
+                Bundle bundle = new Bundle();
+                bundle.putString( "name", textviewName.getText().toString());
+
+                Log.d(this.getClass().getName(), bundle.toString());
+
+
+                Intent intent = new Intent(getActivity(), TourActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+
         return view;
     }
+
+
+
 
     protected void showList () {
         try {

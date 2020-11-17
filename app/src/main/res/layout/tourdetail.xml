@@ -6,52 +6,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:src="@drawable/profile_image" />
-
-    <TextView
-        android:id="@+id/Name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="16dp"
-        android:text="관광지명"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:paddingLeft="16dp"
-        android:text="상세내용"
-        android:textSize="20sp" />
-
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="16dp"
-        android:text="리뷰"
-        android:textSize="20sp" />
-
-    <RatingBar
-        android:id="@+id/rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:numStars="5"
-        android:rating="3"
-        android:stepSize="3"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+    <include layout="@layout/toolbar2"/>
 
     <ListView
-        android:id="@+id/listview"
+        android:id="@+id/tourdetailv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
