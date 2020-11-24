@@ -34,7 +34,7 @@ public class TourActivity extends AppCompatActivity {
 
     private Map<String, String> parameters;
 
-    private static final String TAG_RESULTS = "result";
+    private static final String TAG_RESULTS = "success";
     private static final String TAG_NAME = "tour_name";
     private static final String TAG_TEL = "tour_tel";
     private static final String TAG_ADD = "tour_add";
