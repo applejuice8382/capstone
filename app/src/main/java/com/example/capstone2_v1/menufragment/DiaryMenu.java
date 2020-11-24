@@ -29,6 +29,7 @@ public class DiaryMenu extends ListFragment {
     String myJSON;
 
     private static final String TAG_RESULTS = "result";
+    private static final String TAG_NO = "d.diary_no";
     private static final String TAG_TIME = "d.diary_time";
     private static final String TAG_NAME = "t.tour_name";
     private static final String TAG_TITLE = "d.diary_title";
@@ -45,7 +46,10 @@ public class DiaryMenu extends ListFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         adapter = new DiaryListViewAdapter();
+<<<<<<< HEAD
+=======
         getData("http://172.30.1.33:8070/diary.php");
+>>>>>>> 9a55f6c015103dff3a8f6507459cc36751d255fc
 
         return super.onCreateView(inflater, container, savedInstanceState);
     }
@@ -59,12 +63,13 @@ public class DiaryMenu extends ListFragment {
 
             for (int i = 0; i < diaries.length(); i++) {
                 JSONObject c = diaries.getJSONObject(i);
+                String no = c.getString(TAG_NO);
                 String time = c.getString(TAG_TIME);
                 String name = c.getString(TAG_NAME);
                 String title = c.getString(TAG_TITLE);
                 String con = c.getString(TAG_CON);
 
-                adapter.addItem(time, name, title, con);
+                adapter.addItem(no, time, name, title, con);
             }
 
         } catch (JSONException e) {
@@ -112,6 +117,12 @@ public class DiaryMenu extends ListFragment {
         GetDataJSON g = new GetDataJSON();
         g.execute(url);
 
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        getData("http://192.168.0.16:80/diary.php");
     }
 }
 

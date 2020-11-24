@@ -1,10 +1,19 @@
 package com.example.capstone2_v1.item;
 
 public class DiaryListViewItem {
+    private String no;
     private String date;
     private String where;
     private String title;
     private String content;
+
+    public String getNo() {
+        return no;
+    }
+
+    public void setNo(String no) {
+        this.no = no;
+    }
 
     public String getDate() {
         return date;

@@ -27,8 +27,12 @@
        <activity android:name=".LoginActivity"/>
         <activity android:name=".SearchMenu"/>
         <activity android:name=".insert.InsertDiary"/>
+<<<<<<< HEAD
+        <activity android:name=".EditDiaryActivity"/>
+=======
         <activity android:name=".TourActivity"/>
 
+>>>>>>> 9a55f6c015103dff3a8f6507459cc36751d255fc
 
 
         <meta-data
