@@ -4,7 +4,6 @@ package com.example.capstone2_v1.menufragment;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,19 +16,14 @@ import android.widget.TextView;
 
 
 import com.example.capstone2_v1.R;
-import com.example.capstone2_v1.TourActivity;
+import com.example.capstone2_v1.TourDetailActivity;
 
-
-import net.daum.mf.map.api.MapPOIItem;
-import net.daum.mf.map.api.MapPoint;
-import net.daum.mf.map.api.MapView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -65,7 +59,7 @@ public class TourMenu extends Fragment {
 
         list = (ListView) view.findViewById(R.id.listview);
         tourList = new ArrayList<HashMap<String, String>>();
-        getData("http://172.30.1.33:8070/tour.php"); //수정 필요
+        getData("http://172.30.1.29:80/tour.php"); //수정 필요
 
 //////        카카오지도
 //        MapView mapView = new MapView(getActivity());
@@ -103,7 +97,7 @@ public class TourMenu extends Fragment {
                 Log.d(this.getClass().getName(), bundle.toString());
 
 
-                Intent intent = new Intent(getActivity(), TourActivity.class);
+                Intent intent = new Intent(getActivity(), TourDetailActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

@@ -28,7 +28,7 @@
         <activity android:name=".SearchMenu"/>
         <activity android:name=".insert.InsertDiary"/>
         <activity android:name=".EditDiaryActivity"/>
-        <activity android:name=".TourActivity"/>
+        <activity android:name=".TourDetailActivity"/>
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
