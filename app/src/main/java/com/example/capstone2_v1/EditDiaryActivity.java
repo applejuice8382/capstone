@@ -25,7 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class EditDiaryActivity extends AppCompatActivity {
-    private static String IP_ADDRESS = "192.168.35.21:8070";
+    private static String IP_ADDRESS = "192.168.0.16:80";
     private static String TAG = "phptest";
 
     private TextView editdate,editwhere;

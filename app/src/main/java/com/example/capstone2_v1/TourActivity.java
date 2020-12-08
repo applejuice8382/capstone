@@ -71,7 +71,7 @@ public class TourActivity extends AppCompatActivity {
 
         Log.d(this.getClass().getName(), "파라미터:" + parameters.put("tour_name", Tourname));
 
-        getData("http://192.168.35.21:8070/tourdetail.php");
+        getData("http://172.30.1.33:8070/tourdetail.php");
 
 
 
