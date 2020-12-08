@@ -25,12 +25,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class EditDiaryActivity extends AppCompatActivity {
-    private static String IP_ADDRESS = "192.168.0.16:80";
+    private static String IP_ADDRESS = "192.168.0.5:80";
     private static String TAG = "phptest";
 
-    private TextView editdate,editwhere;
+    private TextView editdate, editwhere;
     private EditText edittitle, editcontent;
-    private Button editsavebtn;
+    private Button editsavebtn, editdeletebtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +61,7 @@ public class EditDiaryActivity extends AppCompatActivity {
         editcontent = (EditText) findViewById(R.id.editcontent);
 
         editsavebtn = (Button) findViewById(R.id.editsavebtn);
+        editdeletebtn = (Button) findViewById(R.id.editdeletebtn);
 
         Intent intent = getIntent();
 
@@ -70,6 +71,7 @@ public class EditDiaryActivity extends AppCompatActivity {
         String title = intent.getExtras().getString("title");
         String content = intent.getExtras().getString("content");
 
+        Log.e("diary_no", diary_no);
         editdate.setText(date);
         editwhere.setText(where);
         edittitle.setText(title);
@@ -89,7 +91,19 @@ public class EditDiaryActivity extends AppCompatActivity {
             }
         });
 
+        editdeletebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DeleteData task1 = new DeleteData();
+                task1.execute("http://" + IP_ADDRESS + "/diarydelete.php",diary_no);
+
+                onBackPressed();
+            }
+
+        });
+
     }
+
     class UpdateData extends AsyncTask<String, Void, String> {
         ProgressDialog progressDialog;
 
@@ -105,20 +119,19 @@ public class EditDiaryActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-
-            progressDialog.dismiss();
             Log.d(TAG, "POST response  - " + result);
+            progressDialog.dismiss();
         }
 
 
         @Override
         protected String doInBackground(String... params) {
 
-            String diary_title = (String)params[1];
-            String diary_con = (String)params[2];
-            String diary_no = (String)params[3];
+            String diary_title = (String) params[1];
+            String diary_con = (String) params[2];
+            String diary_no = (String) params[3];
 
-            String serverURL = (String)params[0];
+            String serverURL = (String) params[0];
             String postParameters = "diary_title=" + diary_title + "&diary_con=" + diary_con + "&diary_no=" + diary_no;
 
 
@@ -144,10 +157,9 @@ public class EditDiaryActivity extends AppCompatActivity {
                 Log.d(TAG, "POST response code - " + responseStatusCode);
 
                 InputStream inputStream;
-                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                if (responseStatusCode == HttpURLConnection.HTTP_OK) {
                     inputStream = httpURLConnection.getInputStream();
-                }
-                else{
+                } else {
                     inputStream = httpURLConnection.getErrorStream();
                 }
 
@@ -158,7 +170,7 @@ public class EditDiaryActivity extends AppCompatActivity {
                 StringBuilder sb = new StringBuilder();
                 String line = null;
 
-                while((line = bufferedReader.readLine()) != null){
+                while ((line = bufferedReader.readLine()) != null) {
                     sb.append(line);
                 }
 
@@ -179,24 +191,74 @@ public class EditDiaryActivity extends AppCompatActivity {
         }
     }
 
-        public boolean onOptionsItemSelected(MenuItem item ){
-            switch(item.getItemId()){
-                case android.R.id.home:
-                    finish();
-                    return true;
+    class DeleteData extends AsyncTask<String, Void, String> {
+        ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog = ProgressDialog.show(EditDiaryActivity.this,
+                    "Please Wait", null, true, true);
+        }
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Log.d(TAG, "GET response  - " + result);
+            progressDialog.dismiss();
+
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+                String uri = (String) params[0];
+                String diary_no = (String) params[1];
+                String link = uri + "/?diary_no=" + diary_no;
+                URL url = new URL(link);
+
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                StringBuilder sb = new StringBuilder();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+                String json;
+
+                while ((json = bufferedReader.readLine()) != null) {
+                    sb.append(json + "\n");
+                }
+                Log.e("??","??");
+
+                return sb.toString().trim();
+            } catch (Exception e) {
+                Log.e("!!","!!");
+                return null;
             }
-            return super.onOptionsItemSelected(item);
-        }
 
-
-        @Override
-        public boolean onCreateOptionsMenu(Menu menu) {
-            getMenuInflater().inflate(R.menu.search,menu);
-            return super.onCreateOptionsMenu(menu);
-        }
-
-        @Override
-        public void onBackPressed() {
-            super.onBackPressed();
         }
     }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+}
