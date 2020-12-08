@@ -14,26 +14,7 @@
         android:layout_marginTop="55dp"
         android:padding="10dp">
 
-        <LinearLayout
-            android:id="@+id/searchpart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="9"
-                android:id="@+id/editSearch"/>
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:src="@drawable/ic_search_black" />
-        </LinearLayout>
-
-        <com.google.android.material.tabs.TabLayout
+      <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,9 +25,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="@id/tabLayout" />
-
-
-
 
     </LinearLayout>
 
@@ -61,5 +39,5 @@
     <!--        android:layout_marginLeft="1dp"-->
     <!--        android:layout_marginTop="10dp"-->
     <!--        android:numColumns="3" />-->
-x
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

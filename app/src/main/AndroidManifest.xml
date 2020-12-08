@@ -30,6 +30,7 @@
         <activity android:name=".EditDiaryActivity"/>
         <activity android:name=".TourActivity"/>
 
+
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="653e23cdebd5e8befaf9fd10d9a505b1"/>

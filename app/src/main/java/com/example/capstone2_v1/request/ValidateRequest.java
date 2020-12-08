@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ValidateRequest extends StringRequest {
-    final static private String URL="http://172.30.1.33:8070/userValidate.php";
+    final static private String URL="http://192.168.35.21:8070/userValidate.php";
     private Map<String, String> map;
 
     public ValidateRequest(String mem_id, Response.Listener<String>listener){

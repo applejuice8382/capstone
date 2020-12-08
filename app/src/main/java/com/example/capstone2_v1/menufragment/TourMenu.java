@@ -65,7 +65,7 @@ public class TourMenu extends Fragment {
 
         list = (ListView) view.findViewById(R.id.listview);
         tourList = new ArrayList<HashMap<String, String>>();
-        getData("http://172.30.1.33:8070/tour.php"); //수정 필요
+        getData("http://192.168.35.21:8070/tour.php"); //수정 필요
 
 //////        카카오지도
 //        MapView mapView = new MapView(getActivity());

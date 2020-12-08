@@ -3,11 +3,14 @@ package com.example.capstone2_v1;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TabHost;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -65,6 +68,8 @@ public class SearchMenu extends AppCompatActivity {
         });
 
     }
+
+
     public boolean onOptionsItemSelected(MenuItem item ){
         switch(item.getItemId()){
             case android.R.id.home:
@@ -79,6 +84,8 @@ public class SearchMenu extends AppCompatActivity {
         super.onBackPressed();
     }
 }
+
+
 
 
 
