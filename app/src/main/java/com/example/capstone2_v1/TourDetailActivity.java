@@ -24,7 +24,7 @@ import androidx.appcompat.widget.Toolbar;
 
 public class TourDetailActivity extends AppCompatActivity {
 
-    private static final String TAG_ADDRESS = "http://172.30.1.29:80/tourdetail.php";
+    private static final String TAG_ADDRESS = "http://192.168.35.21:8070/tourdetail.php";
     private static final String TAG = "phptest";
     private static final String TAG_NAME = "tour_name";
     private static final String TAG_TEL = "tour_tel";
@@ -118,6 +118,19 @@ public class TourDetailActivity extends AppCompatActivity {
         }
 
     }
+    public boolean onOptionsItemSelected(MenuItem item ){
+        switch(item.getItemId()){
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }
+
 

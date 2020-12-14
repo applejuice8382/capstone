@@ -3,10 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.capstone2_v1">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBfyRch5tLmPLHeJ5JI-aiwX638lh-yoTc" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,18 +21,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".SignupActivity"/>
-       <activity android:name=".LoginActivity"/>
-        <activity android:name=".SearchMenu"/>
-        <activity android:name=".insert.InsertDiary"/>
-        <activity android:name=".EditDiaryActivity"/>
-        <activity android:name=".TourDetailActivity"/>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".SignupActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".SearchMenu" />
+        <activity android:name=".insert.InsertDiary" />
+        <activity android:name=".EditDiaryActivity" />
+        <activity android:name=".TourDetailActivity" />
 
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="653e23cdebd5e8befaf9fd10d9a505b1"/>
+            android:value="653e23cdebd5e8befaf9fd10d9a505b1" />
     </application>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
