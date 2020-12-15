@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
@@ -18,7 +21,7 @@
         <View
             android:id="@+id/viewHeader"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="120dp"
             android:background="@color/colorAccent"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="164dp" />
@@ -100,18 +103,23 @@
         android:orientation="vertical">
         <!--app:layout_constraintTop_toBottomOf="@+id/layoutProfile">-->
 
-        <ListView
-            android:id="@+id/listview"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/mypagetab"
             android:layout_width="match_parent"
-            android:layout_height="567dp"
-            android:layout_marginStart="16dp" />
-        <ListView
-            android:id="@+id/friendlistview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            app:tabIndicatorHeight="3dp"
+            app:tabMode="fixed"
+            app:tabPaddingBottom="8dp" />
 
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/mypageviewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mypagetab"/>
     </LinearLayout>
 
 </LinearLayout>
 
-
+</ScrollView>

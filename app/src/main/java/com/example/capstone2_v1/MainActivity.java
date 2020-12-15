@@ -35,11 +35,10 @@ public class MainActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private DiaryMenu DiaryMenu = new DiaryMenu();
-    private MapMenu MapMenu = new MapMenu();
     private MypageMenu MypageMenu = new MypageMenu();
     private TourMenu TourMenu = new TourMenu();
     private ChatMenu ChatMenu = new ChatMenu();
-    private SearchMenu SearchMenu = new SearchMenu();
+
 
     private Context mContext;
     private FloatingActionButton fab_main;
@@ -73,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_view);
         // 첫 화면 지정
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.frame_layout, MapMenu).commitAllowingStateLoss();
+        transaction.replace(R.id.frame_layout, DiaryMenu).commitAllowingStateLoss();
 
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -93,11 +92,6 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 switch (item.getItemId()) {
-                    case R.id.navigation_menu1: {
-                        transaction.replace(R.id.frame_layout, MapMenu).commitAllowingStateLoss();
-                        break;
-                    }
-
                     case R.id.navigation_menu2: {
                         transaction.replace(R.id.frame_layout, DiaryMenu).commitAllowingStateLoss();
                         break;

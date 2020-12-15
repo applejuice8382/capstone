@@ -19,16 +19,6 @@
             android:background="@color/colorAccent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingTop="15dp"
-            android:text="마이페이지"
-            android:textColor="@color/colorWhite"
-            android:textSize="20sp"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <FrameLayout
             android:id="@+id/layoutProfile"
             android:layout_width="match_parent"

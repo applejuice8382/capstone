@@ -3,4 +3,6 @@
     <string name="app_name">Trapic</string>
     <string name="profie_name">이름</string>
     <string name="profie_id">아이디</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
