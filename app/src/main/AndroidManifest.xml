@@ -28,13 +28,8 @@
         <activity android:name=".InsertDiaryActivity" />
         <activity android:name=".EditDiaryActivity" />
         <activity android:name=".TourDetailActivity" />
-<<<<<<< HEAD
-        
-=======
         <activity android:name=".chat.ChatActivity"/>
-
-
->>>>>>> a4ea386e3d2336b3d803eac01e9e38ff0447002d
+        
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="653e23cdebd5e8befaf9fd10d9a505b1" />
