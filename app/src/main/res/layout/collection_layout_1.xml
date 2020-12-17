@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
         android:layout_marginTop="3dp"
-        android:text="하동 녹차 밭"
-        android:textSize="15sp"/>
+        android:text="표충비"
+        android:textSize="15sp"
+        android:id="@+id/col1"/>
 </LinearLayout>

@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorWhite"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -103,6 +100,7 @@
         android:orientation="vertical">
         <!--app:layout_constraintTop_toBottomOf="@+id/layoutProfile">-->
 
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/mypagetab"
             android:layout_width="match_parent"
@@ -115,11 +113,10 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/mypageviewpager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mypagetab"/>
+            app:layout_constraintTop_toBottomOf="@id/mypagetab" />
     </LinearLayout>
 
 </LinearLayout>
 
-</ScrollView>
