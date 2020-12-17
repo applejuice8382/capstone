@@ -147,7 +147,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-
+    public void clickImage (View view){
+        //프로필 이미지 선택하도록 Gallery 앱 실행
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, 10);
+    }
 
 }

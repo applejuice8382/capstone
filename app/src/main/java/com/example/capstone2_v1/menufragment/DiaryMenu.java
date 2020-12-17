@@ -122,4 +122,3 @@ public class DiaryMenu extends ListFragment {
         getData("http://192.168.0.5:80/diary.php");
     }
 }
-

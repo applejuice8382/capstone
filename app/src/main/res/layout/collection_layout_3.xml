@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
         android:layout_marginTop="3dp"
-        android:text="우도"
-        android:textSize="15sp"/>
+        android:text="경복궁"
+        android:textSize="15sp"
+        android:id="@+id/col3"/>
 </LinearLayout>

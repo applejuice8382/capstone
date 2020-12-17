@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import com.example.capstone2_v1.MainActivity;
 import com.example.capstone2_v1.R;
 import com.example.capstone2_v1.SearchMenu;
+import com.example.capstone2_v1.TourDetailActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -85,6 +87,25 @@ public class Fragment1 extends Fragment {
         });
 
         tourList = new ArrayList<>();
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+                TextView textviewName = (TextView) view.findViewById(R.id.name);
+                Bundle bundle = new Bundle();
+                bundle.putString("name", textviewName.getText().toString());
+
+                Log.d(this.getClass().getName(), bundle.toString());
+
+
+                Intent intent = new Intent(getActivity(), TourDetailActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
 
         return v;
 

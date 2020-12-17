@@ -1,22 +1,52 @@
 package com.example.capstone2_v1.mypagefragment;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.ListFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import com.example.capstone2_v1.R;
+import com.example.capstone2_v1.adapter.DiaryListViewAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
 
  */
-public class MypageDiaryFragment extends Fragment {
+public class MypageDiaryFragment extends ListFragment {
 
+    String myJSON;
 
+    private static final String TAG_RESULTS = "result";
+    private static final String TAG_NO = "d.diary_no";
+    private static final String TAG_TIME = "d.diary_time";
+    private static final String TAG_NAME = "t.tour_name";
+    private static final String TAG_TITLE = "d.diary_title";
+    private static final String TAG_CON = "d.diary_con";
+
+    JSONArray diaries = null;
+
+    ArrayList<HashMap<String, String>> diaryList;
+
+    ListView list;
+    DiaryListViewAdapter adapter;
 
     public MypageDiaryFragment() {
         // Required empty public constructor
@@ -24,9 +54,82 @@ public class MypageDiaryFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mypage_diary, container, false);
+        adapter = new DiaryListViewAdapter();
+        getData("http://192.168.35.21:8070/diary.php");
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
+    protected void showList() {
+        try {
+            setListAdapter(adapter);
+            JSONObject jsonObj;
+            jsonObj = new JSONObject(myJSON);
+            diaries = jsonObj.getJSONArray(TAG_RESULTS);
+
+            for (int i = 0; i < diaries.length(); i++) {
+                JSONObject c = diaries.getJSONObject(i);
+                String no = c.getString(TAG_NO);
+                String time = c.getString(TAG_TIME);
+                String name = c.getString(TAG_NAME);
+                String title = c.getString(TAG_TITLE);
+                String con = c.getString(TAG_CON);
+
+                adapter.addItem(no, time, name, title, con);
+
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void getData(String url) {
+        class GetDataJSON extends AsyncTask<String, Void, String> {
+
+            @Override
+            protected String doInBackground(String... params) {
+
+                String uri = params[0];
+
+                BufferedReader bufferedReader = null;
+                try {
+                    URL url = new URL(uri);
+                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                    StringBuilder sb = new StringBuilder();
+
+                    bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+                    String json;
+                    while ((json = bufferedReader.readLine()) != null) {
+                        sb.append(json + "\n");
+
+                    }
+
+                    return sb.toString().trim();
+
+                } catch (Exception e) {
+                    return null;
+                }
+
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                myJSON = result;
+                showList();
+            }
+        }
+        GetDataJSON g = new GetDataJSON();
+        g.execute(url);
+
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        getData("http://192.168.35.21:8070/diary.php");
+    }
+
 }

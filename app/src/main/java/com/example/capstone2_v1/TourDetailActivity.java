@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -55,7 +56,6 @@ public class TourDetailActivity extends AppCompatActivity {
 
             }
         });
-
         tourname = (TextView) findViewById(R.id.tourname);
         tourtel = (TextView) findViewById(R.id.tourtel);
         touradd = (TextView) findViewById(R.id.touradd);
@@ -125,6 +125,12 @@ public class TourDetailActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override

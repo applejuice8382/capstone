@@ -6,6 +6,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -19,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -26,9 +29,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.example.capstone2_v1.MainActivity;
 import com.example.capstone2_v1.R;
 import com.example.capstone2_v1.TourDetailActivity;
+import com.example.capstone2_v1.adapter.HorizontalAdapter;
+import com.example.capstone2_v1.adapter.HorizontalData;
+import com.example.capstone2_v1.searchfragment.Fragment1;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -66,11 +71,21 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static android.content.Context.LOCATION_SERVICE;
 
-public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
+public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback{
 
+    private RecyclerView mHorizontalView;
+
+    // setLayoutManager
+    private HorizontalAdapter mAdapter;
+    // init Adapter
+    private LinearLayoutManager mLayoutManager;
+
+    private int MAX_ITEM_COUNT = 50;
 
     String myJSON;
 
@@ -81,8 +96,9 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
     private static final String TAG_ADD = "tour_add";
     private static final String TAG_LAT = "tour_lat";
     private static final String TAG_LONG = "tour_long";
-
+    private static final String TAG_NAME2 = "tour_name";
     JSONArray tours = null;
+    JSONArray tours2 = null;
 
     ArrayList<HashMap<String, String>> tourList;
 
@@ -114,6 +130,8 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
     private LocationRequest locationRequest;
     private Location location;
 
+    TextView recommend, best;
+
 
     private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요합니다.
 
@@ -125,15 +143,50 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.tour, container, false);
+        final View view = inflater.inflate(R.layout.tour, container, false);
 
         list = (ListView) view.findViewById(R.id.listview);
+        recommend = (TextView) view.findViewById(R.id.recommend);
+        best = (TextView) view.findViewById(R.id.best);
+        best.setTypeface(null, Typeface.BOLD);
+        best.setTextColor(Color.parseColor("#679BBE"));
+
         tourList = new ArrayList<HashMap<String, String>>();
-        getData("http://192.168.35.21:8070/tour.php"); //수정 필요
+        getData("http://192.168.35.21:8070/tour.php");//수정 필요
+        getData2("http://192.168.35.21:8070/tour2.php");//수정 필요
 
         getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        mLayout = view.findViewById(R.id.tour);
+        best.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tourList.clear();
+
+                getData2("http://192.168.35.21:8070/tour2.php");//수정 필요
+
+                best.setTypeface(null, Typeface.BOLD);
+                best.setTextColor(Color.parseColor("#679BBE"));
+                recommend.setTypeface(null, Typeface.NORMAL);
+                recommend.setTextColor(Color.parseColor("#757575"));
+
+            }
+        });
+
+        recommend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tourList.clear();
+
+                getData3("http://192.168.35.21:8070/tour3.php");//수정 필요
+
+                recommend.setTypeface(null, Typeface.BOLD);
+                recommend.setTextColor(Color.parseColor("#679BBE"));
+                best.setTypeface(null, Typeface.NORMAL);
+                best.setTextColor(Color.parseColor("#757575"));
+
+            }
+        });
+
 
         locationRequest = new LocationRequest()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
@@ -174,6 +227,20 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
         });
 
 
+        // RecyclerView binding
+        mHorizontalView = (RecyclerView) view.findViewById(R.id.recyclerView);
+
+        // init LayoutManager
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL); // 기본값이 VERTICAL
+        mHorizontalView.setLayoutManager(mLayoutManager);
+        mAdapter = new HorizontalAdapter();
+//        ArrayList<HorizontalData> data = new ArrayList<>();
+
+//        mAdapter = new HorizontalAdapter(getActivity(), data);
+
+
+
         return view;
     }
 
@@ -183,6 +250,7 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
             JSONObject jsonObj;
             jsonObj = new JSONObject(myJSON);
             tours = jsonObj.getJSONArray(TAG_RESULTS);
+            ArrayList<HorizontalData> data = new ArrayList<>();
 
             for (int i = 0; i < tours.length(); i++) {
                 JSONObject c = tours.getJSONObject(i);
@@ -263,6 +331,148 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
             protected void onPostExecute(String result) {
                 myJSON = result;
                 showList();
+            }
+        }
+        GetDataJSON g = new GetDataJSON();
+        g.execute(url);
+    }
+
+    protected void showList2() {
+        try {
+            JSONObject jsonObj;
+            jsonObj = new JSONObject(myJSON);
+            tours2 = jsonObj.getJSONArray(TAG_RESULTS);
+            ArrayList<HorizontalData> data = new ArrayList<>();
+
+            for (int i = 0; i < tours2.length(); i++) {
+                JSONObject c = tours2.getJSONObject(i);
+                String name2 = c.getString(TAG_NAME2);
+
+                HashMap<String, String> persons = new HashMap<String, String>();
+
+                persons.put(TAG_NAME2, name2);
+
+                data.add(new HorizontalData(R.drawable.jeju, name2));
+
+            }
+
+            mAdapter.setData(data);
+
+            mHorizontalView.setAdapter(mAdapter);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    public void getData2(String url) {
+        class GetDataJSON extends AsyncTask<String, Void, String> {
+
+            @Override
+            protected String doInBackground(String... params) {
+
+                String uri = params[0];
+
+                BufferedReader bufferedReader = null;
+                try {
+                    URL url = new URL(uri);
+                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                    StringBuilder sb = new StringBuilder();
+
+                    bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+                    String json;
+                    while ((json = bufferedReader.readLine()) != null) {
+                        sb.append(json + "\n");
+                    }
+
+                    return sb.toString().trim();
+
+                } catch (Exception e) {
+                    return null;
+                }
+
+
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                myJSON = result;
+                showList2();
+            }
+        }
+        GetDataJSON g = new GetDataJSON();
+        g.execute(url);
+    }
+
+    protected void showList3() {
+        try {
+            JSONObject jsonObj;
+            jsonObj = new JSONObject(myJSON);
+            tours2 = jsonObj.getJSONArray(TAG_RESULTS);
+            ArrayList<HorizontalData> data = new ArrayList<>();
+
+            for (int i = 0; i < tours2.length(); i++) {
+                JSONObject c = tours2.getJSONObject(i);
+                String name2 = c.getString(TAG_NAME2);
+
+                HashMap<String, String> persons = new HashMap<String, String>();
+
+                persons.put(TAG_NAME2, name2);
+
+                data.add(new HorizontalData(R.drawable.jeju, name2));
+
+            }
+
+            mAdapter.setData(data);
+            // set Adapter
+            mHorizontalView.setAdapter(mAdapter);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    public void getData3(String url) {
+        class GetDataJSON extends AsyncTask<String, Void, String> {
+
+            @Override
+            protected String doInBackground(String... params) {
+
+                String uri = params[0];
+
+                BufferedReader bufferedReader = null;
+                try {
+                    URL url = new URL(uri);
+                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                    StringBuilder sb = new StringBuilder();
+
+                    bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+                    String json;
+                    while ((json = bufferedReader.readLine()) != null) {
+                        sb.append(json + "\n");
+                    }
+
+                    return sb.toString().trim();
+
+                } catch (Exception e) {
+                    return null;
+                }
+
+
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                myJSON = result;
+                showList3();
             }
         }
         GetDataJSON g = new GetDataJSON();
@@ -694,5 +904,4 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
 
 
 }
-
 

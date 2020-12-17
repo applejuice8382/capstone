@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import android.os.Bundle;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -22,7 +23,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText idText, passwordText;
+    public EditText idText;
+    public EditText passwordText;
     Button loginButton, signupButton;
     private CheckBox cb_save;
     private Context mContext;
@@ -80,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 };
+
                 LoginRequest loginRequest= new LoginRequest(mem_id, mem_pw, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
                 queue.add(loginRequest);

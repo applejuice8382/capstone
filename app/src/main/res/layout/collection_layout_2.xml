@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
         android:layout_marginTop="3dp"
-        android:text="호미곶 상생의 손"
-        android:textSize="15sp"/>
+        android:text="롯데월드"
+        android:textSize="15sp"
+        android:id="@+id/col2"/>
 </LinearLayout>

@@ -1,19 +1,25 @@
 package com.example.capstone2_v1.menufragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 import com.example.capstone2_v1.FavoriteList;
 import com.example.capstone2_v1.FriendList;
+import com.example.capstone2_v1.LoginActivity;
 import com.example.capstone2_v1.MainActivity;
 import com.example.capstone2_v1.R;
 import com.example.capstone2_v1.mypagefragment.PageAdapter;
+import com.example.capstone2_v1.request.PreferenceManager;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -26,9 +32,10 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 public class MypageMenu extends Fragment {
-
+    private Context mContext;
     private FriendList friendList = new FriendList();
     private FavoriteList favoriteList = new FavoriteList();
+    TextView profileName;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +46,9 @@ public class MypageMenu extends Fragment {
 
         ViewPager2 viewPager2 = view.findViewById(R.id.mypageviewpager);
         viewPager2.setAdapter(new PageAdapter(getActivity()));
+
+        profileName = view.findViewById(R.id.profileName);
+
 
         final TabLayout tabLayout = view.findViewById(R.id.mypagetab);
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(
