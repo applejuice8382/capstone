@@ -46,7 +46,7 @@ public class DiaryMenu extends ListFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         adapter = new DiaryListViewAdapter();
-        getData("http://192.168.35.21:8070/diary.php");
+
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -116,9 +116,10 @@ public class DiaryMenu extends ListFragment {
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
-        getData("http://192.168.35.21:8070/diary.php");
+        adapter = new DiaryListViewAdapter();
+        getData("http://192.168.0.5:80/diary.php");
     }
 }
 
