@@ -1,15 +1,17 @@
 package com.example.capstone2_v1.request;
 
-import com.android.volley.AuthFailureError;
+
 import com.android.volley.Response;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.error.AuthFailureError;
+import com.android.volley.request.StringRequest;
+
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class SignupRequest extends StringRequest {
 
-    private final static String URL = "http://192.168.35.21:8070/Signup.php";
+    private final static String URL = "http://192.168.0.5:80/Signup.php";
     private Map<String, String> parameters;
 
     public SignupRequest(String mem_id, String mem_pw, String mem_nick, Response.Listener<String> listener, Response.ErrorListener errorListener){
@@ -22,7 +24,7 @@ public class SignupRequest extends StringRequest {
     }
 
     @Override
-    protected Map<String, String> getParams() throws AuthFailureError{
+    protected Map<String, String> getParams() throws AuthFailureError {
         return parameters;
     }
 }

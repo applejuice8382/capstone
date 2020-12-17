@@ -1,13 +1,13 @@
 package com.example.capstone2_v1.request;
 
 import com.android.volley.Response;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.request.StringRequest;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class LoginRequest extends StringRequest {
-    final static private String URL = "http://192.168.35.21:8070/Login.php";
+    final static private String URL = "http://192.168.0.5:80/Login.php";
     private Map<String, String> parameters;
 
     public LoginRequest(String mem_id, String mem_pw, Response.Listener<String> listner) {
