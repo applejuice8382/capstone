@@ -2,12 +2,22 @@ package com.example.capstone2_v1;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+import com.android.volley.Response;
+
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,23 +27,30 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 
 public class TourDetailActivity extends AppCompatActivity {
 
-    private static final String TAG_ADDRESS = "http://192.168.35.21:8070/tourdetail.php";
+    private static final String TAG_ADDRESS1 = "http://192.168.35.21:8070/tourdetail.php";
+    private static final String TAG_ADDRESS2 = "http://192.168.35.21:8070/recommend.php";
     private static final String TAG = "phptest";
     private static final String TAG_NAME = "tour_name";
     private static final String TAG_TEL = "tour_tel";
     private static final String TAG_ADD = "tour_add";
     private static final String TAG_CON = "tour_con";
 
+    private Map<String, String> parameters;
+
 
     private TextView tourname, tourtel, touradd, tourcon;
+    private ImageView lineheart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,17 +77,57 @@ public class TourDetailActivity extends AppCompatActivity {
         tourtel = (TextView) findViewById(R.id.tourtel);
         touradd = (TextView) findViewById(R.id.touradd);
         tourcon = (TextView) findViewById(R.id.tourcon);
+        lineheart = (ImageView) findViewById(R.id.lineheart);
+
 
         Intent intent = getIntent();
-        String tour_name = intent.getExtras().getString("name");
-        GetDataJSON task = new GetDataJSON();
+        final String tour_name = intent.getExtras().getString("name");
+        GetDataJSON task1 = new GetDataJSON();
+        GetDataJSON task2 = new GetDataJSON();
         try {
-            task.execute(TAG_ADDRESS, tour_name).get();
+            task1.execute(TAG_ADDRESS1, tour_name).get();
+            task2.execute(TAG_ADDRESS2, tour_name);
+
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
 
+//        lineheart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Response.Listener<String> responseListener = new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        try {
+//                            JSONObject jsonObject = new JSONObject(response);
+//                            boolean success = jsonObject.getBoolean("success");
+//                            if (success) {
+//                                String tour_name1 = jsonObject.getString("tour_name");
+//                                Intent intent = new Intent(TourDetailActivity.this, MainActivity.class);
+//                                intent.putExtra("tour_name", tour_name1);
+//                                TourDetailActivity.this.startActivity(intent);
+//                            } else {
+//                                AlertDialog.Builder builder = new AlertDialog.Builder(TourDetailActivity.this);
+//                                builder.setMessage("로그인에 실패하였습니다.");
+//                                builder.setNegativeButton("다시 시도", null);
+//                                builder.create();
+//                                builder.show();
+//                            }
+//                        } catch (Exception e) {
+//
+//                        }
+//                    }
+//                };
+//
+//                FavoriteRequest favoriteRequest= new FavoriteRequest(tour_name, responseListener);
+//                RequestQueue queue = Volley.newRequestQueue(TourDetailActivity.this);
+//                queue.add(favoriteRequest);
+//            }
+//        });
+
     }
+
 
     class GetDataJSON extends AsyncTask<String, Void, String> {
         @Override
@@ -112,12 +169,15 @@ public class TourDetailActivity extends AppCompatActivity {
                 tourtel.setText(tel);
                 touradd.setText(add);
                 tourcon.setText(con);
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
 
     }
+
+
     public boolean onOptionsItemSelected(MenuItem item ){
         switch(item.getItemId()){
             case android.R.id.home:
@@ -138,5 +198,7 @@ public class TourDetailActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 }
+
+
 
 

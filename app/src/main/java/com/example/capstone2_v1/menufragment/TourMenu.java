@@ -99,8 +99,12 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
     private static final String TAG_NAME2 = "tour_name";
     JSONArray tours = null;
     JSONArray tours2 = null;
+    JSONArray tours3 = null;
+
 
     ArrayList<HashMap<String, String>> tourList;
+    ArrayList<HashMap<String, String>> tourList2;
+    ArrayList<HashMap<String, String>> tourList3;
 
     ListView list;
 
@@ -130,7 +134,8 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
     private LocationRequest locationRequest;
     private Location location;
 
-    TextView recommend, best;
+    TextView recommend, best, current;
+    ListAdapter adapter;
 
 
     private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요합니다.
@@ -147,11 +152,15 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
 
         list = (ListView) view.findViewById(R.id.listview);
         recommend = (TextView) view.findViewById(R.id.recommend);
+        current = (TextView) view.findViewById(R.id.current);
         best = (TextView) view.findViewById(R.id.best);
+
         best.setTypeface(null, Typeface.BOLD);
         best.setTextColor(Color.parseColor("#679BBE"));
 
         tourList = new ArrayList<HashMap<String, String>>();
+        tourList2 = new ArrayList<HashMap<String, String>>();
+        tourList3 = new ArrayList<HashMap<String, String>>();
         getData("http://192.168.35.21:8070/tour.php");//수정 필요
         getData2("http://192.168.35.21:8070/tour2.php");//수정 필요
 
@@ -160,7 +169,7 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
         best.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tourList.clear();
+                tourList2.clear();
 
                 getData2("http://192.168.35.21:8070/tour2.php");//수정 필요
 
@@ -175,7 +184,7 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
         recommend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tourList.clear();
+                tourList3.clear();
 
                 getData3("http://192.168.35.21:8070/tour3.php");//수정 필요
 
@@ -252,6 +261,8 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
             tours = jsonObj.getJSONArray(TAG_RESULTS);
             ArrayList<HorizontalData> data = new ArrayList<>();
 
+
+
             for (int i = 0; i < tours.length(); i++) {
                 JSONObject c = tours.getJSONObject(i);
                 String name = c.getString(TAG_NAME);
@@ -280,13 +291,14 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
 
             }
 
-            ListAdapter adapter = new SimpleAdapter(
+            adapter = new SimpleAdapter(
                     getContext(), tourList, R.layout.tourlistview,
                     new String[]{TAG_NAME, TAG_ADD},
                     new int[]{R.id.name, R.id.address}
             );
 
             list.setAdapter(adapter);
+
             setListViewHeightBasedOnChildren(list);
 
 
@@ -295,6 +307,8 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
         }
 
     }
+
+
 
 
     public void getData(String url) {
@@ -331,6 +345,7 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
             protected void onPostExecute(String result) {
                 myJSON = result;
                 showList();
+
             }
         }
         GetDataJSON g = new GetDataJSON();
@@ -339,18 +354,18 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
 
     protected void showList2() {
         try {
-            JSONObject jsonObj;
-            jsonObj = new JSONObject(myJSON);
-            tours2 = jsonObj.getJSONArray(TAG_RESULTS);
+            JSONObject jsonObj2;
+            jsonObj2 = new JSONObject(myJSON);
+            tours2 = jsonObj2.getJSONArray(TAG_RESULTS);
             ArrayList<HorizontalData> data = new ArrayList<>();
 
             for (int i = 0; i < tours2.length(); i++) {
-                JSONObject c = tours2.getJSONObject(i);
-                String name2 = c.getString(TAG_NAME2);
+                JSONObject c2 = tours2.getJSONObject(i);
+                String name2 = c2.getString(TAG_NAME2);
 
-                HashMap<String, String> persons = new HashMap<String, String>();
+                HashMap<String, String> persons2 = new HashMap<String, String>();
 
-                persons.put(TAG_NAME2, name2);
+                persons2.put(TAG_NAME2, name2);
 
                 data.add(new HorizontalData(R.drawable.jeju, name2));
 
@@ -359,6 +374,7 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
             mAdapter.setData(data);
 
             mHorizontalView.setAdapter(mAdapter);
+            mAdapter.notifyDataSetChanged();
 
 
         } catch (JSONException e) {
@@ -410,26 +426,27 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
 
     protected void showList3() {
         try {
-            JSONObject jsonObj;
-            jsonObj = new JSONObject(myJSON);
-            tours2 = jsonObj.getJSONArray(TAG_RESULTS);
+            JSONObject jsonObj3;
+            jsonObj3 = new JSONObject(myJSON);
+            tours3 = jsonObj3.getJSONArray(TAG_RESULTS);
             ArrayList<HorizontalData> data = new ArrayList<>();
 
-            for (int i = 0; i < tours2.length(); i++) {
-                JSONObject c = tours2.getJSONObject(i);
-                String name2 = c.getString(TAG_NAME2);
+            for (int i = 0; i < tours3.length(); i++) {
+                JSONObject c3 = tours3.getJSONObject(i);
+                String name3 = c3.getString(TAG_NAME2);
 
-                HashMap<String, String> persons = new HashMap<String, String>();
+                HashMap<String, String> persons3 = new HashMap<String, String>();
 
-                persons.put(TAG_NAME2, name2);
+                persons3.put(TAG_NAME2, name3);
 
-                data.add(new HorizontalData(R.drawable.jeju, name2));
+                data.add(new HorizontalData(R.drawable.jeju, name3));
 
             }
 
             mAdapter.setData(data);
             // set Adapter
             mHorizontalView.setAdapter(mAdapter);
+            mAdapter.notifyDataSetChanged();
 
 
         } catch (JSONException e) {
@@ -571,10 +588,11 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
                         + " 경도:" + String.valueOf(location.getLongitude());
 
                 Log.d(TAG, "onLocationResult : " + markerSnippet);
+                current.setText(markerTitle);
 
-
-                //현재 위치에 마커 생성하고 이동
-                setCurrentLocation(location, markerTitle, markerSnippet);
+//
+//                //현재 위치에 마커 생성하고 이동
+                setCurrentLocation(location,null, null);
 
                 mCurrentLocatiion = location;
             }
@@ -710,7 +728,7 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
         markerOptions.draggable(true);
 
 
-        currentMarker = mMap.addMarker(markerOptions);
+//        currentMarker = mMap.addMarker(markerOptions);
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
         mMap.moveCamera(cameraUpdate);
