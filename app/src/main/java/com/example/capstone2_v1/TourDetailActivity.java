@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.android.volley.Response;
-import com.example.capstone2_v1.request.FavoriteRequest;
+
 
 
 import org.json.JSONArray;
@@ -83,9 +83,10 @@ public class TourDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         final String tour_name = intent.getExtras().getString("name");
         GetDataJSON task1 = new GetDataJSON();
-
+        GetDataJSON task2 = new GetDataJSON();
         try {
             task1.execute(TAG_ADDRESS1, tour_name).get();
+            task2.execute(TAG_ADDRESS2, tour_name);
 
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
