@@ -2,6 +2,7 @@ package com.example.capstone2_v1.menufragment;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,6 +37,7 @@ public class DiaryMenu extends ListFragment {
     private static final String TAG_NAME = "t.tour_name";
     private static final String TAG_TITLE = "d.diary_title";
     private static final String TAG_CON = "d.diary_con";
+    private static final String TAG_IMAGE = "d.imgPath";
 
     JSONArray diaries = null;
 
@@ -47,32 +51,37 @@ public class DiaryMenu extends ListFragment {
 
         adapter = new DiaryListViewAdapter();
 
+        adapter.notifyDataSetChanged();
+        setListAdapter(adapter);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     protected void showList() {
-        try {
-            setListAdapter(adapter);
-            JSONObject jsonObj;
-            jsonObj = new JSONObject(myJSON);
-            diaries = jsonObj.getJSONArray(TAG_RESULTS);
 
-            for (int i = 0; i < diaries.length(); i++) {
-                JSONObject c = diaries.getJSONObject(i);
-                String no = c.getString(TAG_NO);
-                String time = c.getString(TAG_TIME);
-                String name = c.getString(TAG_NAME);
-                String title = c.getString(TAG_TITLE);
-                String con = c.getString(TAG_CON);
+                try {
+                    setListAdapter(adapter);
+                    JSONObject jsonObj;
+                    jsonObj = new JSONObject(myJSON);
+                    diaries = jsonObj.getJSONArray(TAG_RESULTS);
 
-                adapter.addItem(no, time, name, title, con);
+                    for (int i = 0; i < diaries.length(); i++) {
+                        JSONObject c = diaries.getJSONObject(i);
+                        String no = c.getString(TAG_NO);
+                        String time = c.getString(TAG_TIME);
+                        String name = c.getString(TAG_NAME);
+                        String title = c.getString(TAG_TITLE);
+                        String con = c.getString(TAG_CON);
+                        String image = "http://192.168.0.5:80/" + c.getString(TAG_IMAGE);
+                        Log.e("image", image);
+
+                        adapter.addItem(no, time, name, title, con, image);
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     public void getData(String url) {
         class GetDataJSON extends AsyncTask<String, Void, String> {
@@ -120,5 +129,6 @@ public class DiaryMenu extends ListFragment {
         super.onResume();
         adapter = new DiaryListViewAdapter();
         getData("http://192.168.0.5:80/diary.php");
+        adapter.notifyDataSetChanged();
     }
 }

@@ -6,6 +6,7 @@ public class DiaryListViewItem {
     private String where;
     private String title;
     private String content;
+    private String imgPath;
 
     public String getNo() {
         return no;
@@ -45,5 +46,13 @@ public class DiaryListViewItem {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 }

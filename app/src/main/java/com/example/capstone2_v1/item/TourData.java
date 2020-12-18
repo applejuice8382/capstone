@@ -1,4 +1,4 @@
-package com.example.capstone2_v1.adapter;
+package com.example.capstone2_v1.item;
 
 public class TourData {
 

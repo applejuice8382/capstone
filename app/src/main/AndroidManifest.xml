@@ -25,11 +25,11 @@
         <activity android:name=".SignupActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SearchMenu" />
-        <activity android:name=".InsertDiaryActivity" />
-        <activity android:name=".EditDiaryActivity" />
+        <activity android:name=".DiaryInsertActivity" />
+        <activity android:name=".DiaryEditActivity" />
         <activity android:name=".TourDetailActivity" />
         <activity android:name=".chat.ChatActivity"/>
-        
+
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="653e23cdebd5e8befaf9fd10d9a505b1" />

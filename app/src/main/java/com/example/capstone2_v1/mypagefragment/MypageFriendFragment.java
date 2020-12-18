@@ -60,7 +60,7 @@ public class MypageFriendFragment extends Fragment {
 
         list = (ListView) view.findViewById(R.id.listview);
         userList = new ArrayList<HashMap<String, String>>();
-        getData("http://192.168.35.21:8070/user.php"); //수정 필요
+        getData("http://192.168.0.5:80/user.php"); //수정 필요
 
         return view;
     }

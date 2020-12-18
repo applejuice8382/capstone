@@ -4,24 +4,28 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.capstone2_v1.EditDiaryActivity;
+import com.bumptech.glide.Glide;
+import com.example.capstone2_v1.DiaryEditActivity;
 import com.example.capstone2_v1.R;
-import com.example.capstone2_v1.insert.InsertDiary;
 import com.example.capstone2_v1.item.DiaryListViewItem;
-import com.example.capstone2_v1.menufragment.DiaryMenu;
 
 import java.util.ArrayList;
+
+import androidx.fragment.app.FragmentTransaction;
 
 
 public class DiaryListViewAdapter extends BaseAdapter {
@@ -35,6 +39,7 @@ public class DiaryListViewAdapter extends BaseAdapter {
     public int getCount(){
         return listViewItemlist.size();
     }
+
 
     @Override
     public View getView(int position, View convertView, final ViewGroup parent) {
@@ -50,6 +55,7 @@ public class DiaryListViewAdapter extends BaseAdapter {
         TextView whereView = (TextView) convertView.findViewById(R.id.diarywhere);
         TextView titleView = (TextView) convertView.findViewById(R.id.diarytitle);
         final TextView contentView = (TextView) convertView.findViewById(R.id.diarycontent);
+        ImageView imageView = (ImageView) convertView.findViewById(R.id.iv);
 
         final DiaryListViewItem listViewItem = listViewItemlist.get(position);
 
@@ -57,15 +63,9 @@ public class DiaryListViewAdapter extends BaseAdapter {
         whereView.setText(listViewItem.getWhere());
         titleView.setText(listViewItem.getTitle());
         contentView.setText(listViewItem.getContent());
+        Glide.with(convertView).load(listViewItem.getImgPath()).into(imageView);
 
         final LinearLayout cmdArea = (LinearLayout)convertView.findViewById(R.id.cmdArea);
-
-//        cmdArea.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(view.getContext(), listViewItemlist.get(pos).toString(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
         cmdArea.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -75,12 +75,13 @@ public class DiaryListViewAdapter extends BaseAdapter {
                         .setNegativeButton("예", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                Intent intent = new Intent(context, EditDiaryActivity.class);
+                                Intent intent = new Intent(context, DiaryEditActivity.class);
                                 intent.putExtra("no",listViewItemlist.get(pos).getNo());
                                 intent.putExtra("date",listViewItemlist.get(pos).getDate());
                                 intent.putExtra("where",listViewItemlist.get(pos).getWhere());
                                 intent.putExtra("title", listViewItemlist.get(pos).getTitle());
                                 intent.putExtra("content",listViewItemlist.get(pos).getContent());
+                                intent.putExtra("image",listViewItemlist.get(pos).getImgPath());
                                 context.startActivity(intent);
                             }
                         })
@@ -107,7 +108,7 @@ public class DiaryListViewAdapter extends BaseAdapter {
         return listViewItemlist.get(position);
     }
 
-    public void addItem(String no, String date, String where, String title, String content){
+    public void addItem(String no, String date, String where, String title, String content, String image){
         DiaryListViewItem item = new DiaryListViewItem();
 
         item.setNo(no);
@@ -115,6 +116,7 @@ public class DiaryListViewAdapter extends BaseAdapter {
         item.setWhere(where);
         item.setTitle(title);
         item.setContent(content);
+        item.setImgPath(image);
 
         listViewItemlist.add(item);
 
