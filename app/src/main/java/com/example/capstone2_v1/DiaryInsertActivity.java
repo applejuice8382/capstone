@@ -30,7 +30,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.loader.content.CursorLoader;
 
-public class InsertDiaryActivity extends AppCompatActivity {
+public class DiaryInsertActivity extends AppCompatActivity {
 
     private EditText ediary_title, emem_id, ediary_con, etour_no;
     private TextView mTextViewResult;
@@ -184,7 +184,7 @@ public class InsertDiaryActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(InsertDiaryActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DiaryInsertActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -197,7 +197,8 @@ public class InsertDiaryActivity extends AppCompatActivity {
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         requestQueue.add(smpr);
 
-        onBackPressed();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
 

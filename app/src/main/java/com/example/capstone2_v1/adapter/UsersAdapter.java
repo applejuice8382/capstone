@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.capstone2_v1.R;
+import com.example.capstone2_v1.item.TourData;
 
 import java.util.ArrayList;
 

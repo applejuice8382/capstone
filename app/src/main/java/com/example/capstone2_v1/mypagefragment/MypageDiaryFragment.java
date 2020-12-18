@@ -14,7 +14,6 @@ import android.widget.ListView;
 
 import com.example.capstone2_v1.R;
 import com.example.capstone2_v1.adapter.DiaryListViewAdapter;
-import com.example.capstone2_v1.adapter.MyPageDiaryListViewAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,13 +40,14 @@ public class MypageDiaryFragment extends ListFragment {
     private static final String TAG_NAME = "t.tour_name";
     private static final String TAG_TITLE = "d.diary_title";
     private static final String TAG_CON = "d.diary_con";
+    private static final String TAG_IMAGE = "d.diary_imgPath";
 
     JSONArray diaries = null;
 
     ArrayList<HashMap<String, String>> diaryList;
 
     ListView list;
-    MyPageDiaryListViewAdapter adapter;
+    DiaryListViewAdapter adapter;
 
     public MypageDiaryFragment() {
         // Required empty public constructor
@@ -57,8 +57,8 @@ public class MypageDiaryFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        adapter = new MyPageDiaryListViewAdapter();
-        getData("http://192.168.35.21:8070/diary.php");
+        adapter = new DiaryListViewAdapter();
+        getData("http://192.168.0.5:80/diary.php");
         return super.onCreateView(inflater, container, savedInstanceState);
     }
     protected void showList() {
@@ -75,8 +75,9 @@ public class MypageDiaryFragment extends ListFragment {
                 String name = c.getString(TAG_NAME);
                 String title = c.getString(TAG_TITLE);
                 String con = c.getString(TAG_CON);
+                String image = c.getString(TAG_IMAGE);
 
-                adapter.addItem(no, time, name, title, con);
+                adapter.addItem(no, time, name, title, con, image);
 
             }
 
@@ -130,7 +131,7 @@ public class MypageDiaryFragment extends ListFragment {
     @Override
     public void onResume(){
         super.onResume();
-        getData("http://192.168.35.21:8070/diary.php");
+        getData("http://192.168.0.5:80/diary.php");
     }
 
 }
