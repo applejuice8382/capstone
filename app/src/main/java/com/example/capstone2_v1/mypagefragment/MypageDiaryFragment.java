@@ -14,6 +14,7 @@ import android.widget.ListView;
 
 import com.example.capstone2_v1.R;
 import com.example.capstone2_v1.adapter.DiaryListViewAdapter;
+import com.example.capstone2_v1.adapter.MyPageDiaryListViewAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,7 +47,7 @@ public class MypageDiaryFragment extends ListFragment {
     ArrayList<HashMap<String, String>> diaryList;
 
     ListView list;
-    DiaryListViewAdapter adapter;
+    MyPageDiaryListViewAdapter adapter;
 
     public MypageDiaryFragment() {
         // Required empty public constructor
@@ -56,7 +57,7 @@ public class MypageDiaryFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        adapter = new DiaryListViewAdapter();
+        adapter = new MyPageDiaryListViewAdapter();
         getData("http://192.168.35.21:8070/diary.php");
         return super.onCreateView(inflater, container, savedInstanceState);
     }

@@ -23,11 +23,11 @@ import com.example.capstone2_v1.menufragment.DiaryMenu;
 import java.util.ArrayList;
 
 
-public class DiaryListViewAdapter extends BaseAdapter {
+public class MyPageDiaryListViewAdapter extends BaseAdapter {
 
     private ArrayList<DiaryListViewItem> listViewItemlist = new ArrayList<DiaryListViewItem>();
 
-    public DiaryListViewAdapter() {
+    public MyPageDiaryListViewAdapter() {
     }
 
     @Override
@@ -42,7 +42,7 @@ public class DiaryListViewAdapter extends BaseAdapter {
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.diarylistview, parent, false);
+            convertView = inflater.inflate(R.layout.mypagediarylistview, parent, false);
         }
 
         TextView dateView = (TextView) convertView.findViewById(R.id.diarydate);

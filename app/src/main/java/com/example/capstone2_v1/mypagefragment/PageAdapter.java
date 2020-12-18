@@ -20,9 +20,7 @@ public class PageAdapter extends FragmentStateAdapter {
             case 0:
                 return new MypageDiaryFragment();
             default:
-                return new MypageFriendFragment();
-//            case 2:
-//                return new MypageFavoriteFragment();
+                return new MypageFavoriteFragment();
 //            default:
 //                return new MypageReviewFragment();
         }

@@ -119,6 +119,6 @@ public class DiaryMenu extends ListFragment {
     public void onResume() {
         super.onResume();
         adapter = new DiaryListViewAdapter();
-        getData("http://192.168.0.5:80/diary.php");
+        getData("http://192.168.35.21:8070/diary.php");
     }
 }

@@ -91,11 +91,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     }
 
-                    case R.id.navigation_menu4: {
-                        transaction.replace(R.id.frame_layout, ChatMenu).commitAllowingStateLoss();
-                        break;
-                    }
-
                     case R.id.navigation_menu5: {
                         transaction.replace(R.id.frame_layout, MypageMenu).commitAllowingStateLoss();
                         break;
