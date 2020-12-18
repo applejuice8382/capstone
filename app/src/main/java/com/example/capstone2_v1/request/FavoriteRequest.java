@@ -1,6 +1,10 @@
 package com.example.capstone2_v1.request;
 
+<<<<<<< HEAD
 import com.android.volley.Response;
+=======
+
+>>>>>>> e7b9d833d0846472a788169a0bd1538ed999eae6
 
 import java.util.HashMap;
 import java.util.Map;

@@ -40,16 +40,19 @@ public class TourDetailActivity extends AppCompatActivity {
 
     private static final String TAG_ADDRESS1 = "http://192.168.35.21:8070/tourdetail.php";
     private static final String TAG_ADDRESS2 = "http://192.168.35.21:8070/recommend.php";
+    private static final String TAG_ADDRESS3 = "http://192.168.35.21:8070/favorite.php";
     private static final String TAG = "phptest";
     private static final String TAG_NAME = "tour_name";
     private static final String TAG_TEL = "tour_tel";
     private static final String TAG_ADD = "tour_add";
     private static final String TAG_CON = "tour_con";
+    private static final String TAG_NO = "tour_no";
+    private static final String TAG_FAVORITE = "favorite";
 
     private Map<String, String> parameters;
 
 
-    private TextView tourname, tourtel, touradd, tourcon;
+    private TextView tourname, tourtel, touradd, tourcon, favorite1;
     private ImageView lineheart;
 
     @Override
@@ -79,57 +82,38 @@ public class TourDetailActivity extends AppCompatActivity {
         tourcon = (TextView) findViewById(R.id.tourcon);
         lineheart = (ImageView) findViewById(R.id.lineheart);
 
-
         Intent intent = getIntent();
         final String tour_name = intent.getExtras().getString("name");
-        GetDataJSON task1 = new GetDataJSON();
-        GetDataJSON task2 = new GetDataJSON();
+        GetDataJSON1 task1 = new GetDataJSON1();
+        GetDataJSON1 task2 = new GetDataJSON1();
+        final GetDataJSON2 task3 = new GetDataJSON2();
         try {
             task1.execute(TAG_ADDRESS1, tour_name).get();
             task2.execute(TAG_ADDRESS2, tour_name);
+
 
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
 
-//        lineheart.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Response.Listener<String> responseListener = new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        try {
-//                            JSONObject jsonObject = new JSONObject(response);
-//                            boolean success = jsonObject.getBoolean("success");
-//                            if (success) {
-//                                String tour_name1 = jsonObject.getString("tour_name");
-//                                Intent intent = new Intent(TourDetailActivity.this, MainActivity.class);
-//                                intent.putExtra("tour_name", tour_name1);
-//                                TourDetailActivity.this.startActivity(intent);
-//                            } else {
-//                                AlertDialog.Builder builder = new AlertDialog.Builder(TourDetailActivity.this);
-//                                builder.setMessage("로그인에 실패하였습니다.");
-//                                builder.setNegativeButton("다시 시도", null);
-//                                builder.create();
-//                                builder.show();
-//                            }
-//                        } catch (Exception e) {
-//
-//                        }
-//                    }
-//                };
-//
-//                FavoriteRequest favoriteRequest= new FavoriteRequest(tour_name, responseListener);
-//                RequestQueue queue = Volley.newRequestQueue(TourDetailActivity.this);
-//                queue.add(favoriteRequest);
-//            }
-//        });
+        lineheart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+
+                    lineheart.setImageResource(R.drawable.heart);
+                    task3.execute(TAG_ADDRESS3, tour_name).get();
+
+                }catch (ExecutionException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
 
     }
-
-
-    class GetDataJSON extends AsyncTask<String, Void, String> {
+    class GetDataJSON1 extends AsyncTask<String, Void, String> {
         @Override
         protected void onPreExecute() {
         }
@@ -169,6 +153,49 @@ public class TourDetailActivity extends AppCompatActivity {
                 tourtel.setText(tel);
                 touradd.setText(add);
                 tourcon.setText(con);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    class GetDataJSON2 extends AsyncTask<String, Void, String> {
+        @Override
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                String uri = (String) params[0];
+                String tour_name = (String) params[1];
+                String link = uri +"?tour_name=" + tour_name;
+                URL url = new URL(link);
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                StringBuilder sb = new StringBuilder();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+                String json;
+
+                while ((json = bufferedReader.readLine()) != null) {
+                    sb.append(json + "\n");
+                }
+                return sb.toString().trim();
+            } catch (Exception e) {
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+                JSONObject c = jsonArray.getJSONObject(0);
+                String favorite = c.getString(TAG_FAVORITE);
+
+                lineheart.setImageResource(R.drawable.heart);
 
             } catch (JSONException e) {
                 e.printStackTrace();

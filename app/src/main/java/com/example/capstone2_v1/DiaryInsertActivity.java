@@ -174,7 +174,7 @@ public class DiaryInsertActivity extends AppCompatActivity {
         String diary_con = ediary_con.getText().toString();
         String tour_no = etour_no.getText().toString();
 
-        String serverUrl="http://192.168.0.5:80/diaryinsert.php";
+        String serverUrl="http://192.168.35.21:8070/diaryinsert.php";
 
         SimpleMultiPartRequest smpr= new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
             @Override
