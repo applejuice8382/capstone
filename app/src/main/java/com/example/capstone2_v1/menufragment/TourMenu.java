@@ -161,8 +161,8 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
         tourList = new ArrayList<HashMap<String, String>>();
         tourList2 = new ArrayList<HashMap<String, String>>();
         tourList3 = new ArrayList<HashMap<String, String>>();
-        getData("http://192.168.35.21:8070/tour.php");//수정 필요
-        getData2("http://192.168.35.21:8070/tour2.php");//수정 필요
+        getData("http://192.168.0.5:80/tour.php");//수정 필요
+        getData2("http://192.168.0.5:80/tour2.php");//수정 필요
 
         getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -171,7 +171,7 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
             public void onClick(View v) {
                 tourList2.clear();
 
-                getData2("http://192.168.35.21:8070/tour2.php");//수정 필요
+                getData2("http://192.168.0.5:80/tour2.php");//수정 필요
 
                 best.setTypeface(null, Typeface.BOLD);
                 best.setTextColor(Color.parseColor("#679BBE"));
@@ -186,7 +186,7 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
             public void onClick(View v) {
                 tourList3.clear();
 
-                getData3("http://192.168.35.21:8070/tour3.php");//수정 필요
+                getData3("http://192.168.0.5:80/tour3.php");//수정 필요
 
                 recommend.setTypeface(null, Typeface.BOLD);
                 recommend.setTextColor(Color.parseColor("#679BBE"));
@@ -362,12 +362,13 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
             for (int i = 0; i < tours2.length(); i++) {
                 JSONObject c2 = tours2.getJSONObject(i);
                 String name2 = c2.getString(TAG_NAME2);
+                String image = "http://192.168.0.5:80/" + c2.getString("imgPath");
 
                 HashMap<String, String> persons2 = new HashMap<String, String>();
 
                 persons2.put(TAG_NAME2, name2);
 
-                data.add(new HorizontalData(R.drawable.jeju, name2));
+                data.add(new HorizontalData(image, name2));
 
             }
 
@@ -434,12 +435,13 @@ public class TourMenu extends Fragment implements OnMapReadyCallback, ActivityCo
             for (int i = 0; i < tours3.length(); i++) {
                 JSONObject c3 = tours3.getJSONObject(i);
                 String name3 = c3.getString(TAG_NAME2);
+                String image = "http://192.168.0.5:80/" + c3.getString("imgPath");
 
                 HashMap<String, String> persons3 = new HashMap<String, String>();
 
                 persons3.put(TAG_NAME2, name3);
 
-                data.add(new HorizontalData(R.drawable.jeju, name3));
+                data.add(new HorizontalData(image, name3));
 
             }
 

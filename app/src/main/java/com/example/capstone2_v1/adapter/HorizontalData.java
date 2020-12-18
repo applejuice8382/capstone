@@ -2,11 +2,11 @@ package com.example.capstone2_v1.adapter;
 
 public class HorizontalData {
 
-    private int img;
+    private String imgPath;
     private String text;
 
-    public HorizontalData(int img, String text){
-        this.img = img;
+    public HorizontalData(String imgPath, String text){
+        this.imgPath = imgPath;
         this.text = text;
     }
 
@@ -14,7 +14,11 @@ public class HorizontalData {
         return this.text;
     }
 
-    public int getImg() {
-        return this.img;
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 }

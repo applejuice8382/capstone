@@ -51,8 +51,6 @@ public class DiaryMenu extends ListFragment {
 
         adapter = new DiaryListViewAdapter();
 
-        adapter.notifyDataSetChanged();
-        setListAdapter(adapter);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -129,6 +127,5 @@ public class DiaryMenu extends ListFragment {
         super.onResume();
         adapter = new DiaryListViewAdapter();
         getData("http://192.168.0.5:80/diary.php");
-        adapter.notifyDataSetChanged();
     }
 }

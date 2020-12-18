@@ -13,6 +13,9 @@ class HorizontalViewHolder extends RecyclerView.ViewHolder {
     public ImageView icon;
     public TextView description;
 
+    public TextView img;
+
+
     public HorizontalViewHolder(View itemView) {
         super(itemView);
 

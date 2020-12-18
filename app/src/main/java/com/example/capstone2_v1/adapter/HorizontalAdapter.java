@@ -2,7 +2,10 @@ package com.example.capstone2_v1.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +13,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.capstone2_v1.R;
 import com.example.capstone2_v1.TourDetailActivity;
+import com.example.capstone2_v1.menufragment.TourMenu;
 
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.loader.content.CursorLoader;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalViewHolder> {
@@ -23,11 +29,12 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalViewHolder
     private ArrayList<HorizontalData> HorizontalDatas;
     private Context mContext;
 
+
     public void setData(ArrayList<HorizontalData> list){
         HorizontalDatas = list;
     }
-
-
+    HorizontalViewHolder holder;
+    String imgPath;
     @Override
     public HorizontalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -35,7 +42,7 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalViewHolder
         final View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.horizon_recycler_items, parent, false);
 
-        HorizontalViewHolder holder = new HorizontalViewHolder(view);
+        holder = new HorizontalViewHolder(view);
 
         return holder;
     }
@@ -45,7 +52,8 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalViewHolder
         HorizontalData data = HorizontalDatas.get(position);
 
         holder.description.setText(data.getText());
-        holder.icon.setImageResource(data.getImg());
+
+        Glide.with(holder.icon.getContext()).load(data.getImgPath()).into(holder.icon);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +72,16 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalViewHolder
             }
         });
 
+    }
+    String getRealPathFromUri(Uri uri){
+        String[] proj= {MediaStore.Images.Media.DATA};
+        CursorLoader loader= new CursorLoader(holder.icon.getContext(), uri, proj, null, null, null);
+        Cursor cursor= loader.loadInBackground();
+        int column_index= cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String result= cursor.getString(column_index);
+        cursor.close();
+        return  result;
     }
 
     @Override
