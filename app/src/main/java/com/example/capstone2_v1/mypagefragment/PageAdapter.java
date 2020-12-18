@@ -19,16 +19,18 @@ public class PageAdapter extends FragmentStateAdapter {
         switch (position) {
             case 0:
                 return new MypageDiaryFragment();
-            case 1:
-                return new MypageFriendFragment();
             default:
-                return new MypageFavoriteFragment();
+                return new MypageFriendFragment();
+//            case 2:
+//                return new MypageFavoriteFragment();
+//            default:
+//                return new MypageReviewFragment();
         }
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 2;
     }
 
 

@@ -65,15 +65,19 @@ public class MypageMenu extends Fragment {
                         tab.setIcon(R.drawable.friend);
                         break;
                     }
-                    case 2:{
-                        tab.setIcon(R.drawable.ic_lineheart);
-                        BadgeDrawable badgeDrawable = tab.getOrCreateBadge();
-                        badgeDrawable.setBackgroundColor(
-                                ContextCompat.getColor(getActivity(), R.color.colorAccent)
-                        );
-                        badgeDrawable.setVisible(true);
-                        break;
-                    }
+//                    case 2: {
+//                        tab.setIcon(R.drawable.ic_lineheart);
+//                        BadgeDrawable badgeDrawable = tab.getOrCreateBadge();
+//                        badgeDrawable.setBackgroundColor(
+//                                ContextCompat.getColor(getActivity(), R.color.colorAccent)
+//                        );
+//                        badgeDrawable.setVisible(true);
+//                        break;
+//                    }
+//                    case 3:{
+//                        tab.setIcon(R.drawable.review);
+//                        break;
+//                    }
 
                 }
             }

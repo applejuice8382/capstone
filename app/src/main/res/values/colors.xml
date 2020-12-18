@@ -9,5 +9,6 @@
     <color name="colorTextSecondary">#757575</color>
     <color name="azur">#f1f5f8</color>
     <color name="colorBackground">#FBFBFB</color>
+    <color name="Gray">#EAEAEA</color>
 
 </resources>

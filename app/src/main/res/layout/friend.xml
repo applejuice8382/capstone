@@ -35,7 +35,7 @@
                 android:layout_height="100dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="5dp"
                 app:cardBackgroundColor="@color/colorWhite"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="5dp">
@@ -107,8 +107,7 @@
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             app:tabIndicatorHeight="3dp"
-            app:tabMode="fixed"
-            app:tabPaddingBottom="8dp" />
+            app:tabMode="fixed"/>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/mypageviewpager"
