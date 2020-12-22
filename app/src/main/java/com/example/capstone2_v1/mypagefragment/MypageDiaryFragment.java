@@ -3,9 +3,12 @@ package com.example.capstone2_v1.mypagefragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.ListFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +43,7 @@ public class MypageDiaryFragment extends ListFragment {
     private static final String TAG_NAME = "t.tour_name";
     private static final String TAG_TITLE = "d.diary_title";
     private static final String TAG_CON = "d.diary_con";
-    private static final String TAG_IMAGE = "d.diary_imgPath";
+    private static final String TAG_IMAGE = "d.imgPath";
 
     JSONArray diaries = null;
 
@@ -49,19 +52,16 @@ public class MypageDiaryFragment extends ListFragment {
     ListView list;
     DiaryListViewAdapter adapter;
 
-    public MypageDiaryFragment() {
-        // Required empty public constructor
-    }
 
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         adapter = new DiaryListViewAdapter();
-        getData("http://192.168.0.5:80/diary.php");
+
         return super.onCreateView(inflater, container, savedInstanceState);
     }
+
     protected void showList() {
+
         try {
             setListAdapter(adapter);
             JSONObject jsonObj;
@@ -75,17 +75,17 @@ public class MypageDiaryFragment extends ListFragment {
                 String name = c.getString(TAG_NAME);
                 String title = c.getString(TAG_TITLE);
                 String con = c.getString(TAG_CON);
-                String image = c.getString(TAG_IMAGE);
+                String image = "http://172.30.1.30:80/" + c.getString(TAG_IMAGE);
+                Log.e("image", image);
 
                 adapter.addItem(no, time, name, title, con, image);
 
             }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
+
 
     public void getData(String url) {
         class GetDataJSON extends AsyncTask<String, Void, String> {
@@ -129,9 +129,9 @@ public class MypageDiaryFragment extends ListFragment {
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
-        getData("http://192.168.0.5:80/diary.php");
+        adapter = new DiaryListViewAdapter();
+        getData("http://172.30.1.30:80/diary1.php");
     }
-
 }

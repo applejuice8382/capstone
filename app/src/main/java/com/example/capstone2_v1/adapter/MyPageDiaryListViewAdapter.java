@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.capstone2_v1.EditDiaryActivity;
+import com.example.capstone2_v1.DiaryEditActivity;
 import com.example.capstone2_v1.R;
 import com.example.capstone2_v1.item.DiaryListViewItem;
 import com.example.capstone2_v1.menufragment.DiaryMenu;
@@ -74,7 +74,7 @@ public class MyPageDiaryListViewAdapter extends BaseAdapter {
                         .setNegativeButton("예", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                Intent intent = new Intent(context, EditDiaryActivity.class);
+                                Intent intent = new Intent(context, DiaryEditActivity.class);
                                 intent.putExtra("no",listViewItemlist.get(pos).getNo());
                                 intent.putExtra("date",listViewItemlist.get(pos).getDate());
                                 intent.putExtra("where",listViewItemlist.get(pos).getWhere());

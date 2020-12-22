@@ -45,7 +45,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_marginTop="6dp"
             android:orientation="horizontal">
 
@@ -96,7 +96,7 @@
                 android:textSize="15dp"/>
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="100dp"
                 android:gravity="center"
                 android:text="내용"
                 android:textSize="16dp"

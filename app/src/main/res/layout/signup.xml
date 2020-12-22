@@ -34,7 +34,8 @@
                 android:background="@drawable/edittextstyle"
                 android:layout_width="250dp"
                 android:layout_height="48dp"
-                android:hint="아이디 입력"></EditText>
+                android:hint="아이디 입력"
+                android:textSize="17dp"/>
             <Button
                 android:id="@+id/validateButton"
                 android:layout_gravity="center_vertical"
@@ -61,7 +62,8 @@
                 android:background="@drawable/edittextstyle"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:hint="비밀번호 입력"></EditText>
+                android:hint="비밀번호 입력"
+                android:textSize="17dp"/>
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -74,7 +76,8 @@
                     android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:hint="비밀번호 재입력"></EditText>
+                    android:hint="비밀번호 재입력"
+                    android:textSize="17dp"/>
 
                 <ImageView
                     android:layout_marginRight="15dp"
@@ -99,7 +102,8 @@
                 android:background="@drawable/edittextstyle"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:hint="이름 입력"></EditText>
+                android:hint="이름 입력"
+                android:textSize="17dp"/>
 
             <Button
                 android:id="@+id/buttonsignup"

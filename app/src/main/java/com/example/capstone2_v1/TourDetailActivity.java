@@ -2,6 +2,7 @@ package com.example.capstone2_v1;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,7 +17,7 @@ import android.widget.TextView;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.android.volley.Response;
-
+import com.bumptech.glide.Glide;
 
 
 import org.json.JSONArray;
@@ -38,9 +39,9 @@ import androidx.appcompat.widget.Toolbar;
 
 public class TourDetailActivity extends AppCompatActivity {
 
-    private static final String TAG_ADDRESS1 = "http://192.168.35.21:8070/tourdetail.php";
-    private static final String TAG_ADDRESS2 = "http://192.168.35.21:8070/recommend.php";
-    private static final String TAG_ADDRESS3 = "http://192.168.35.21:8070/favorite.php";
+    private static final String TAG_ADDRESS1 = "http://172.30.1.30:80/tourdetail.php";
+    private static final String TAG_ADDRESS2 = "http://172.30.1.30:80/recommend.php";
+    private static final String TAG_ADDRESS3 = "http://172.30.1.30:80/favorite.php";
     private static final String TAG = "phptest";
     private static final String TAG_NAME = "tour_name";
     private static final String TAG_TEL = "tour_tel";
@@ -53,7 +54,7 @@ public class TourDetailActivity extends AppCompatActivity {
 
 
     private TextView tourname, tourtel, touradd, tourcon, favorite1;
-    private ImageView lineheart;
+    private ImageView lineheart, tourimage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +82,7 @@ public class TourDetailActivity extends AppCompatActivity {
         touradd = (TextView) findViewById(R.id.touradd);
         tourcon = (TextView) findViewById(R.id.tourcon);
         lineheart = (ImageView) findViewById(R.id.lineheart);
+        tourimage = (ImageView) findViewById(R.id.tourimage);
 
         Intent intent = getIntent();
         final String tour_name = intent.getExtras().getString("name");
@@ -149,10 +151,14 @@ public class TourDetailActivity extends AppCompatActivity {
                 String tel = c.getString(TAG_TEL);
                 String add = c.getString(TAG_ADD);
                 String con = c.getString(TAG_CON);
+                String image = "http://172.30.1.30:80/" + c.getString("imgPath");
+
                 tourname.setText(name);
                 tourtel.setText(tel);
                 touradd.setText(add);
                 tourcon.setText(con);
+
+                Glide.with(tourimage.getContext()).load(image).into(tourimage);
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -225,7 +231,6 @@ public class TourDetailActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 }
-
 
 
 

@@ -32,16 +32,16 @@ public class MypageFavoriteFragment extends Fragment {
 
     String myJSON;
 
-    JSONArray users = null;
+    JSONArray tours = null;
 
     private static final String TAG_RESULTS = "result";
 
     private static final String TAG_JSON="result";
     private static final String TAG_NAME = "tour_name";
-    private static final String TAG_NICK = "mem_nick";
+    private static final String TAG_ADD = "tour_add";
 
 
-    ArrayList<HashMap<String, String>> userList;
+    ArrayList<HashMap<String, String>> tourList;
 
     ListView list;
 
@@ -56,41 +56,38 @@ public class MypageFavoriteFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_mypage_favorite, container, false);
 
         list = (ListView) view.findViewById(R.id.listview);
-        userList = new ArrayList<HashMap<String, String>>();
-        getData("http://192.168.0.5:80/user.php"); //수정 필요
+        tourList = new ArrayList<HashMap<String, String>>();
+        getData("http://172.30.1.30:80/favorite2.php"); //수정 필요
 
         return view;
     }
 
-    protected void showList() {
+    protected void showList () {
         try {
             JSONObject jsonObj;
             jsonObj = new JSONObject(myJSON);
-            users = jsonObj.getJSONArray(TAG_RESULTS);
+            tours = jsonObj.getJSONArray(TAG_RESULTS);
 
-            for (int i = 0; i < users.length(); i++) {
-                JSONObject c = users.getJSONObject(i);
+            for (int i = 0; i < tours.length(); i++) {
+                JSONObject c = tours.getJSONObject(i);
                 String name = c.getString(TAG_NAME);
-                String nick = c.getString(TAG_NICK);
-
+                String address = c.getString(TAG_ADD);
 
                 HashMap<String, String> persons = new HashMap<String, String>();
 
                 persons.put(TAG_NAME, name);
-                persons.put(TAG_NICK, nick);
+                persons.put(TAG_ADD, address);
 
-
-                userList.add(persons);
+                tourList.add(persons);
             }
 
             ListAdapter adapter = new SimpleAdapter(
-                    getContext(), userList, R.layout.userlistview,
-                    new String[]{TAG_NAME, TAG_NICK},
-                    new int[]{R.id.mem_id, R.id.mem_nick}
+                    getContext(), tourList, R.layout.tourlistview,
+                    new String[]{TAG_NAME, TAG_ADD},
+                    new int[]{R.id.name, R.id.address}
             );
 
             list.setAdapter(adapter);
-            setListViewHeightBasedOnChildren(list);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -99,7 +96,7 @@ public class MypageFavoriteFragment extends Fragment {
     }
 
 
-    public void getData(String url) {
+    public void getData (String url){
         class GetDataJSON extends AsyncTask<String, Void, String> {
 
             @Override
