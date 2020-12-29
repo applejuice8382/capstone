@@ -3,16 +3,21 @@
     <item
         android:id="@+id/navigation_menu2"
         android:icon="@drawable/ic_event_note"
-        android:title="diary"/>
+        android:title="diary" />
 
     <item
         android:id="@+id/navigation_menu3"
         android:icon="@drawable/ic_tour"
-        android:title="tour"/>
+        android:title="tour" />
+
+    <item
+        android:id="@+id/navigation_menu4"
+        android:icon="@drawable/ic_chat"
+        android:title="chat" />
 
     <item
         android:id="@+id/navigation_menu5"
         android:icon="@drawable/ic_mypage"
-        android:title="mypage"/>
+        android:title="mypage" />
 
 </menu>

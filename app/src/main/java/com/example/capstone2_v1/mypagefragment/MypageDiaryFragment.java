@@ -75,7 +75,7 @@ public class MypageDiaryFragment extends ListFragment {
                 String name = c.getString(TAG_NAME);
                 String title = c.getString(TAG_TITLE);
                 String con = c.getString(TAG_CON);
-                String image = "http://172.30.1.30:80/" + c.getString(TAG_IMAGE);
+                String image = "http://192.168.35.21:8070/" + c.getString(TAG_IMAGE);
                 Log.e("image", image);
 
                 adapter.addItem(no, time, name, title, con, image);
@@ -132,6 +132,6 @@ public class MypageDiaryFragment extends ListFragment {
     public void onResume() {
         super.onResume();
         adapter = new DiaryListViewAdapter();
-        getData("http://172.30.1.30:80/diary1.php");
+        getData("http://192.168.35.21:8070/diary1.php");
     }
 }

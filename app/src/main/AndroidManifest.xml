@@ -28,7 +28,6 @@
         <activity android:name=".DiaryInsertActivity" />
         <activity android:name=".DiaryEditActivity" />
         <activity android:name=".TourDetailActivity" />
-        <activity android:name=".chat.ChatActivity"/>
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
@@ -41,8 +40,5 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
-
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
 </manifest>

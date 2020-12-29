@@ -13,7 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-//import com.example.capstone2_v1.menufragment.ChatMenu;
+import com.example.capstone2_v1.menufragment.ChatMenu;
+import com.example.capstone2_v1.menufragment.ChatMenu;
 import com.example.capstone2_v1.menufragment.DiaryMenu;
 import com.example.capstone2_v1.menufragment.MypageMenu;
 import com.example.capstone2_v1.menufragment.TourMenu;
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private DiaryMenu DiaryMenu = new DiaryMenu();
     private MypageMenu MypageMenu = new MypageMenu();
     private TourMenu TourMenu = new TourMenu();
-    //private ChatMenu ChatMenu = new ChatMenu();
+    private ChatMenu ChatMenu = new ChatMenu();
 
 
     private Context mContext;
@@ -88,6 +89,11 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.navigation_menu3: {
                         transaction.replace(R.id.frame_layout, TourMenu).commitAllowingStateLoss();
+                        break;
+                    }
+
+                    case R.id.navigation_menu4: {
+                        transaction.replace(R.id.frame_layout, ChatMenu).commitAllowingStateLoss();
                         break;
                     }
 

@@ -62,11 +62,11 @@
             android:textSize="15sp" />
     </LinearLayout>
     <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_centerInParent="true"
-        android:background="@color/Gray"
-        android:padding="8dp"/>
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_centerInParent="true"
+    android:background="@color/Gray"
+    android:padding="8dp"/>
     <LinearLayout
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
@@ -86,6 +86,33 @@
             android:layout_height="wrap_content"
             android:paddingLeft="8dp"
             android:text="전화번호가 없습니다."
+            android:textSize="15sp" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:background="@color/Gray"
+        android:padding="8dp"/>
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_access_time_24"
+            android:paddingTop="1dp"/>
+        <TextView
+            android:id="@+id/tourtime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:text="연중무휴"
             android:textSize="15sp" />
     </LinearLayout>
     <View

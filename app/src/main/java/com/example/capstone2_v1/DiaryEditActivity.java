@@ -38,7 +38,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.loader.content.CursorLoader;
 
 public class DiaryEditActivity extends AppCompatActivity {
-    private static String IP_ADDRESS = "192.168.0.5:80";
+    private static String IP_ADDRESS = "192.168.35.21:8070";
     private static String TAG = "phptest";
 
     String diary_no = "";
@@ -242,7 +242,7 @@ public class DiaryEditActivity extends AppCompatActivity {
             Log.e("con: ", diary_con);
             Log.e("no: ", diaryNo);
 
-            String serverUrl = "http://192.168.0.5:80/diaryedit.php";
+            String serverUrl = "http://192.168.35.21:8070/diaryedit.php";
 
             SimpleMultiPartRequest smpr = new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
                 @Override
@@ -270,7 +270,7 @@ public class DiaryEditActivity extends AppCompatActivity {
             String diary_con = editcontent.getText().toString();
             String diaryNo = diary_no;
 
-            String serverUrl = "http://192.168.0.5:80/diaryedit1.php";
+            String serverUrl = "http://192.168.35.21:8070/diaryedit1.php";
 
             SimpleMultiPartRequest smpr = new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
                 @Override

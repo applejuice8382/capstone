@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -174,7 +175,7 @@ public class DiaryInsertActivity extends AppCompatActivity {
         String diary_con = ediary_con.getText().toString();
         String tour_no = etour_no.getText().toString();
 
-        String serverUrl="http://192.168.35.21:8070/diaryinsert.php";
+        String serverUrl="http://192.168.35.21:8070 /diaryinsert.php";
 
         SimpleMultiPartRequest smpr= new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
             @Override

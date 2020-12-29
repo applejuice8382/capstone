@@ -1,6 +1,10 @@
 package com.example.capstone2_v1.chat;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
+import de.hdodenhof.circleimageview.CircleImageView;
 
+import android.app.Application;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,65 +12,73 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.capstone2_v1.Public.Se_Application;
 import com.example.capstone2_v1.R;
+import com.example.capstone2_v1.chat.dummy.DummyContent.DummyItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
+/**
+ * {@link RecyclerView.Adapter} that can display a {@link DummyItem}.
+ * TODO: Replace the implementation with code for your data type.
+ */
+public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
-public class ChatAdapter extends BaseAdapter {
+    private final List<ChatMsgVO> mValues;
 
-    ArrayList<MessageItem> messageItems;
-    LayoutInflater layoutInflater;
-
-    public ChatAdapter(ArrayList<MessageItem> messageItems, LayoutInflater layoutInflater) {
-        this.messageItems = messageItems;
-        this.layoutInflater = layoutInflater;
+    public ChatAdapter(List<ChatMsgVO> items) {
+        mValues = items;
     }
 
     @Override
-    public int getCount() {
-        return messageItems.size();
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.custom_chat_msg, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public Object getItem(int position) {
-        return messageItems.get(position);
+    public void onBindViewHolder(final ViewHolder holder, int position) {
+
+        ChatMsgVO vo = mValues.get(position);
+        if (mValues.get(position).getUserid().equals("lsy123")) {
+            holder.other_cl.setVisibility(View.GONE);
+            holder.my_cl.setVisibility(View.VISIBLE);
+
+            holder.date_tv2.setText(vo.getCrt_dt());
+            holder.content_tv2.setText(vo.getContent1());
+        }else
+        {
+            holder.other_cl.setVisibility(View.VISIBLE);
+            holder.my_cl.setVisibility(View.GONE);
+
+            holder.userid_tv.setText(vo.getUserid());
+            holder.date_tv.setText(vo.getCrt_dt());
+            holder.content_tv.setText(vo.getContent1());
+        }
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
+    public int getItemCount() {
+        return mValues.size();
     }
 
-    @Override
-    public View getView(int position, View view, ViewGroup viewGroup) {
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public ConstraintLayout my_cl, other_cl;
+        public TextView userid_tv, date_tv, content_tv, date_tv2, content_tv2;
 
-        //현재 보여줄 번째의(position)의 데이터로 뷰를 생성
-        MessageItem item=messageItems.get(position);
+        public ViewHolder(View view) {
+            super(view);
+            my_cl = view.findViewById(R.id.my_cl);
+            other_cl = view.findViewById(R.id.other_cl);
+            userid_tv = view.findViewById(R.id.userid_tv);
+            date_tv = view.findViewById(R.id.date_tv);
+            content_tv = view.findViewById(R.id.content_tv);
+            date_tv2 = view.findViewById(R.id.date_tv2);
+            content_tv2 = view.findViewById(R.id.content_tv2);
 
-        //재활용할 뷰는 사용하지 않음!!
-        View itemView=null;
-
-        //메세지가 내 메세지인지??
-        if(item.getName().equals(G.nickName)){
-            itemView= layoutInflater.inflate(R.layout.my_msgbox,viewGroup,false);
-        }else{
-            itemView= layoutInflater.inflate(R.layout.other_msgbox,viewGroup,false);
         }
 
-        //만들어진 itemView에 값들 설정
-        CircleImageView iv= itemView.findViewById(R.id.iv);
-        TextView tvName= itemView.findViewById(R.id.tv_name);
-        TextView tvMsg= itemView.findViewById(R.id.tv_msg);
-        TextView tvTime= itemView.findViewById(R.id.tv_time);
-
-        tvName.setText(item.getName());
-        tvMsg.setText(item.getMessage());
-        tvTime.setText(item.getTime());
-
-        Glide.with(itemView).load(item.getPofileUrl()).into(iv);
-
-        return itemView;
     }
 }

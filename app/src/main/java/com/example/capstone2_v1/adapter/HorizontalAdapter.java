@@ -66,9 +66,20 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalViewHolder
 
                 Intent intent = new Intent(v.getContext(), TourDetailActivity.class);
 
-                intent.putExtra("name", bundle);
+                intent.putExtra("name", HorizontalDatas.get(position).getText());
                 Log.d(this.getClass().getName(),HorizontalDatas.get(position).getText());
                 v.getContext().startActivity(intent);
+//
+//                TextView textviewName = (TextView) findViewById(R.id.horizon_description);
+//                Bundle bundle = new Bundle();
+//                bundle.putString("name", textviewName.getText().toString());
+//
+//                Log.d(this.getClass().getName(), bundle.toString());
+//
+//
+//                Intent intent = new Intent(getActivity(), TourDetailActivity.class);
+//                intent.putExtras(bundle);
+//                startActivity(intent);
             }
         });
 

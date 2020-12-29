@@ -39,12 +39,13 @@ import androidx.appcompat.widget.Toolbar;
 
 public class TourDetailActivity extends AppCompatActivity {
 
-    private static final String TAG_ADDRESS1 = "http://172.30.1.30:80/tourdetail.php";
-    private static final String TAG_ADDRESS2 = "http://172.30.1.30:80/recommend.php";
-    private static final String TAG_ADDRESS3 = "http://172.30.1.30:80/favorite.php";
+    private static final String TAG_ADDRESS1 = "http://192.168.35.21:8070/tourdetail.php";
+    private static final String TAG_ADDRESS2 = "http://192.168.35.21:8070/recommend.php";
+    private static final String TAG_ADDRESS3 = "http://192.168.35.21:8070/favorite.php";
     private static final String TAG = "phptest";
     private static final String TAG_NAME = "tour_name";
     private static final String TAG_TEL = "tour_tel";
+    private static final String TAG_TIME = "tour_time";
     private static final String TAG_ADD = "tour_add";
     private static final String TAG_CON = "tour_con";
     private static final String TAG_NO = "tour_no";
@@ -53,7 +54,7 @@ public class TourDetailActivity extends AppCompatActivity {
     private Map<String, String> parameters;
 
 
-    private TextView tourname, tourtel, touradd, tourcon, favorite1;
+    private TextView tourname, tourtel, touradd, tourcon, favorite1, tourtime;
     private ImageView lineheart, tourimage;
 
     @Override
@@ -79,6 +80,7 @@ public class TourDetailActivity extends AppCompatActivity {
         });
         tourname = (TextView) findViewById(R.id.tourname);
         tourtel = (TextView) findViewById(R.id.tourtel);
+        tourtime = (TextView) findViewById(R.id.tourtime);
         touradd = (TextView) findViewById(R.id.touradd);
         tourcon = (TextView) findViewById(R.id.tourcon);
         lineheart = (ImageView) findViewById(R.id.lineheart);
@@ -150,11 +152,13 @@ public class TourDetailActivity extends AppCompatActivity {
                 String name = c.getString(TAG_NAME);
                 String tel = c.getString(TAG_TEL);
                 String add = c.getString(TAG_ADD);
+                String time = c.getString(TAG_TIME);
                 String con = c.getString(TAG_CON);
-                String image = "http://172.30.1.30:80/" + c.getString("imgPath");
+                String image = "http://192.168.35.21:8070/" + c.getString("imgPath");
 
                 tourname.setText(name);
                 tourtel.setText(tel);
+                tourtime.setText(time);
                 touradd.setText(add);
                 tourcon.setText(con);
 

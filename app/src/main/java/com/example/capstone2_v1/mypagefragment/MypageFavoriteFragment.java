@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.example.capstone2_v1.R;
+import com.example.capstone2_v1.adapter.DiaryListViewAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -57,8 +59,8 @@ public class MypageFavoriteFragment extends Fragment {
 
         list = (ListView) view.findViewById(R.id.listview);
         tourList = new ArrayList<HashMap<String, String>>();
-        getData("http://172.30.1.30:80/favorite2.php"); //수정 필요
 
+        getData("http://192.168.35.21:8070/favorite2.php");
         return view;
     }
 
@@ -159,4 +161,5 @@ public class MypageFavoriteFragment extends Fragment {
 
         listView.requestLayout();
     }
+
 }

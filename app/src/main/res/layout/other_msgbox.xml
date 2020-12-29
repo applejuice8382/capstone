@@ -29,7 +29,7 @@
         android:layout_marginLeft="16dp"
         android:padding="12dp"
         android:maxWidth="250dp"
-        android:background="@drawable/back_et_othermsgbox"
+        android:background="@drawable/bg_content_et"
         android:textColor="#333333"/>
     <TextView
         android:id="@+id/tv_time"
