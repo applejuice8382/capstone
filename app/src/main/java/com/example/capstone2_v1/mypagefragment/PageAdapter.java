@@ -21,8 +21,6 @@ public class PageAdapter extends FragmentStateAdapter {
                 return new MypageDiaryFragment();
             default:
                 return new MypageFavoriteFragment();
-//            default:
-//                return new MypageReviewFragment();
         }
     }
 
