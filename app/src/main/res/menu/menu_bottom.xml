@@ -11,11 +11,6 @@
         android:title="tour" />
 
     <item
-        android:id="@+id/navigation_menu4"
-        android:icon="@drawable/ic_chat"
-        android:title="chat" />
-
-    <item
         android:id="@+id/navigation_menu5"
         android:icon="@drawable/ic_mypage"
         android:title="mypage" />
